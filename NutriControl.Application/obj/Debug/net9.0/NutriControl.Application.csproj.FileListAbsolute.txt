@@ -1,0 +1,17 @@
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Application.deps.json
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Application.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Application.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Domain.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Shared.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Domain.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\bin\Debug\net9.0\NutriControl.Shared.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.csproj.AssemblyReference.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.AssemblyInfoInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.AssemblyInfo.cs
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.csproj.CoreCompileInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriCon.3A63343F.Up2Date
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\refint\NutriControl.Application.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\NutriControl.Application.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Application\obj\Debug\net9.0\ref\NutriControl.Application.dll

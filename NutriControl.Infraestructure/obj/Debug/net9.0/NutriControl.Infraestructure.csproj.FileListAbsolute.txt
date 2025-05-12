@@ -1,0 +1,15 @@
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\bin\Debug\net9.0\NutriControl.Infraestructure.deps.json
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\bin\Debug\net9.0\NutriControl.Infraestructure.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\bin\Debug\net9.0\NutriControl.Infraestructure.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\bin\Debug\net9.0\NutriControl.Domain.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\bin\Debug\net9.0\NutriControl.Domain.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.csproj.AssemblyReference.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.AssemblyInfoInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.AssemblyInfo.cs
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriCon.A280508B.Up2Date
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\refint\NutriControl.Infraestructure.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\NutriControl.Infraestructure.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Infraestructure\obj\Debug\net9.0\ref\NutriControl.Infraestructure.dll

@@ -1,0 +1,12 @@
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\bin\Debug\net9.0\NutriControl.Shared.deps.json
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\bin\Debug\net9.0\NutriControl.Shared.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\bin\Debug\net9.0\NutriControl.Shared.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.csproj.AssemblyReference.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.AssemblyInfoInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.AssemblyInfo.cs
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.csproj.CoreCompileInputs.cache
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\refint\NutriControl.Shared.dll
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\NutriControl.Shared.pdb
+C:\Users\chris\RiderProjects\NutriControl\NutriControl.Shared\obj\Debug\net9.0\ref\NutriControl.Shared.dll

@@ -7,5 +7,5 @@ public interface ICropQueryService
 {
     Task<List<CropResponse>?> Handle(GetAllCropsQuery query);
     Task<CropResponse?> Handle(GetCropByIdQuery query);
-    Task<CropResponse?> Handle(GetCropByFieldId query);
+    Task<List<CropResponse>?> Handle(GetCropsByFieldId query);
 }

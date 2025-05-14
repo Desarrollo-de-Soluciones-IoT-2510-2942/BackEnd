@@ -8,7 +8,7 @@ public interface ICropRepository
    
     Task<Crop> GetCropByIdAsync(int id);
     
-    Task<Crop> GetCropByFieldIdAsync(int fieldId);
+    Task<List<Crop>> GetCropsByFieldIdAsync(int fieldId);
     
     Task<int>  SaveCropAsync(Crop dataCrop);
     Task<bool> UpdateCropAsync(Crop dataCrop, int id);

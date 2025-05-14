@@ -8,7 +8,9 @@ public interface IFieldRepository
    
     Task<Field> GetFieldByIdAsync(int id);
     
-    Task<Field> GetFieldByUserIdAsync(int userId);
+    Task<List<Field>> GetFieldsByUserIdAsync(int userId);
+    
+    Task<Field> GetFieldByNameAsync(string name);
     
     Task<int>  SaveFieldAsync(Field dataField);
     Task<bool> UpdateFieldAsync(Field dataField, int id);

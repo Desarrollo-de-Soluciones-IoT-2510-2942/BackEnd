@@ -23,9 +23,9 @@ public class CropRepository : ICropRepository
         return await _context.Crops.SingleOrDefaultAsync(s => s.Id == id && s.IsActive);
     }
 
-    public async Task<Crop> GetCropByFieldIdAsync(int fieldId)
+    public async Task<List<Crop>> GetCropsByFieldIdAsync(int fieldId)
     {
-        return await _context.Crops.SingleOrDefaultAsync(s => s.FieldId == fieldId && s.IsActive);
+        return await _context.Crops.Where(s => s.FieldId == fieldId && s.IsActive).ToListAsync();
     }
 
     public async Task<int> SaveCropAsync(Crop dataCrop)

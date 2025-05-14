@@ -1,3 +1,3 @@
 ﻿namespace NutriControl.Domain.Crop.Models.Queries;
 
-public record GetCropByFieldId(int FieldId);
+public record GetCropsByFieldId(int FieldId);

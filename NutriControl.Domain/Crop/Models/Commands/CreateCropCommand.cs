@@ -7,6 +7,9 @@ public class CreateCropCommand
 {
     [JsonIgnore]
     public int FieldId { get; set; }
+    
+    [Required(ErrorMessage = "El nombre del campo es obligatorio.")]
+    public string FieldName { get; set; }
 
     [Required(ErrorMessage = "El tipo de cultivo es obligatorio.")]
     public string CropType { get; set; } 

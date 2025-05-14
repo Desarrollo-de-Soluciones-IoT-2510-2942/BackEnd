@@ -21,7 +21,7 @@
             <response code="500">If there is an internal server error</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.GetByFieldIdAsync(System.Int32)">
-            <summary>Obtain the active crop for a specific field</summary>
+            <summary>Obtain the active crops for a specific field</summary>
             <param name="fieldId">Field ID</param>
             <response code="200">Returns the crop for the field</response>
             <response code="404">If no crop is found for the field</response>
@@ -29,13 +29,14 @@
         </member>
         <member name="M:Presentation.Controllers.CropController.PostAsync(Presentation.Request.CreateCropCommand)">
              <summary>
-             Crea un nuevo Crop para el campo del usuario autenticado.
+             Crea un nuevo Crop para un campo específico.
              </summary>
              <remarks>
              Ejemplo de solicitud:
             
                  POST /api/Crop
                  {
+                    "fieldName": "Field1",
                     "cropType": "Wheat",
                     "quantity": 100,
                     "status": "Active"
@@ -46,7 +47,7 @@
              <returns>El ID del cultivo recién creado</returns>
              <response code="201">Devuelve el ID del cultivo creado</response>
              <response code="400">Si el cultivo tiene propiedades inválidas</response>
-             <response code="404">Si no se encuentra un campo para el usuario</response>
+             <response code="404">Si no se encuentra un campo con el nombre especificado</response>
              <response code="500">Si ocurre un error inesperado</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.PutAsync(System.Int32,Presentation.Request.UpdateCropCommand)">
@@ -96,8 +97,15 @@
             <response code="404">Si el campo no se encuentra</response>
             <response code="500">Si ocurre un error interno</response>
         </member>
+        <member name="M:Presentation.Controllers.FieldController.GetFieldByNameAsync(System.String)">
+            <summary>Obtiene un campo por su Nombre</summary>
+            <param name="name">Nombre del campo</param>
+            <response code="200">Devuelve el campo</response>
+            <response code="404">Si el campo no se encuentra</response>
+            <response code="500">Si ocurre un error interno</response>
+        </member>
         <member name="M:Presentation.Controllers.FieldController.GetByUserIdAsync(System.Int32)">
-            <summary>Obtiene el campo activo de un usuario específico</summary>
+            <summary>Obtiene los campos del usuario activo</summary>
             <param name="userId">ID del usuario</param>
             <response code="200">Devuelve el campo del usuario</response>
             <response code="404">Si no se encuentra un campo para el usuario</response>

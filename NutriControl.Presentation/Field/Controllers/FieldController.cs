@@ -76,14 +76,47 @@ public class FieldController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
+    
+    
+    // GET: api/Field/name
+    /// <summary>Obtiene un campo por su Nombre</summary>
+    /// <param name="name">Nombre del campo</param>
+    /// <response code="200">Devuelve el campo</response>
+    /// <response code="404">Si el campo no se encuentra</response>
+    /// <response code="500">Si ocurre un error interno</response>
+    [HttpGet("name/{name}", Name = "GetFieldByName")]
+    [CustomAuthorize("Farmer")]
+    [ProducesResponseType(typeof(FieldResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+    [Produces(MediaTypeNames.Application.Json)]
+    public async Task<IActionResult> GetFieldByNameAsync(string name)
+    {
+        try
+        {
+            var result = await _fieldQueryService.Handle(new GetFieldByNameQuery(name));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+    
+    
+    
 
     // GET: api/Field/user/id
-    /// <summary>Obtiene el campo activo de un usuario específico</summary>
+    /// <summary>Obtiene los campos del usuario activo</summary>
     /// <param name="userId">ID del usuario</param>
     /// <response code="200">Devuelve el campo del usuario</response>
     /// <response code="404">Si no se encuentra un campo para el usuario</response>
     /// <response code="500">Si ocurre un error interno</response>
-    [HttpGet("user/{userId}", Name = "GetFieldByUserId")]
+    [HttpGet("user/{userId}", Name = "GetFieldsByUserId")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(FieldResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -93,7 +126,7 @@ public class FieldController : ControllerBase
     {
         try
         {
-            var result = await _fieldQueryService.Handle(new GetFieldByUserIdQuery(userId));
+            var result = await _fieldQueryService.Handle(new GetFieldsByUserIdQuery(userId));
 
             if (result == null)
                 return NotFound();
@@ -144,6 +177,13 @@ public class FieldController : ControllerBase
         command.UserId = user.Id;
 
         if (!ModelState.IsValid) return BadRequest();
+
+        // Verificar si ya existe un campo con el mismo nombre
+        var existingField = await _fieldQueryService.FindFieldByNameAsync(command.Name);
+        if (existingField != null)
+        {
+            return Conflict("Ya existe un campo con el mismo nombre.");
+        }
 
         var result = await _fieldCommandService.Handle(command);
 

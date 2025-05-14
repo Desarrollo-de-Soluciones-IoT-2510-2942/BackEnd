@@ -24,9 +24,14 @@ public class FieldRepository : IFieldRepository
         return await _context.Fields.SingleOrDefaultAsync(s => s.Id == id && s.IsActive);
     }
 
-    public async Task<Field> GetFieldByUserIdAsync(int userId)
+    public async Task<List<Field>> GetFieldsByUserIdAsync(int userId)
     {
-        return await _context.Fields.SingleOrDefaultAsync(s => s.UserId == userId && s.IsActive);
+        return await _context.Fields.Where(s => s.UserId == userId && s.IsActive).ToListAsync();
+    }
+    
+    public async Task<Field> GetFieldByNameAsync(string name)
+    {
+        return await _context.Fields.SingleOrDefaultAsync(s => s.Name == name && s.IsActive);
     }
 
     public async Task<int> SaveFieldAsync(Field dataField)

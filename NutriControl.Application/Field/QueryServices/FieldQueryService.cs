@@ -32,15 +32,26 @@ public class FieldQueryService : IFieldQueryService
         return result;
     }
 
-    public async Task<FieldResponse?> Handle(GetFieldByUserIdQuery query)
+    public async Task<List<FieldResponse>?> Handle(GetFieldsByUserIdQuery query)
     {
-        var data = await _fieldRepository.GetFieldByUserIdAsync(query.UserId);
+        var data = await _fieldRepository.GetFieldsByUserIdAsync(query.UserId);
+        var result = _mapper.Map<List<Field>, List<FieldResponse>>(data);
+        return result;
+    }
+
+
+    public async Task<FieldResponse?> Handle(GetFieldByNameQuery query)
+    {
+        var data = await _fieldRepository.GetFieldByNameAsync(query.Name);
         var result = _mapper.Map<Field, FieldResponse>(data);
         return result;
     }
     
-    public async Task<Field?> GetFieldByUserIdDirectAsync(int userId)
+    public async Task<FieldResponse?> FindFieldByNameAsync(string fieldName)
     {
-        return await _fieldRepository.GetFieldByUserIdAsync(userId);
+        var data = await _fieldRepository.GetFieldByNameAsync(fieldName);
+        return _mapper.Map<Field, FieldResponse>(data);
     }
+    
+    
 }

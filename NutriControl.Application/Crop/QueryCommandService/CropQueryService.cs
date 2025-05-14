@@ -30,10 +30,10 @@ public class CropQueryService: ICropQueryService
         return result;
     }
 
-    public async Task<CropResponse?> Handle(GetCropByFieldId query)
+    public async Task<List<CropResponse>?> Handle(GetCropsByFieldId query)
     {
-        var data = await _cropRepository.GetCropByFieldIdAsync(query.FieldId);
-        var result = _mapper.Map<Crop, CropResponse>(data);
+        var data = await _cropRepository.GetCropsByFieldIdAsync(query.FieldId);
+        var result = _mapper.Map<List<Crop>, List<CropResponse>>(data);
         return result;
     }
 }

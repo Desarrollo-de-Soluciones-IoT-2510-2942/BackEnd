@@ -8,7 +8,9 @@ public interface IFieldQueryService
 {
     Task<List<FieldResponse>?> Handle(GetAllFieldsQuery query);
     Task<FieldResponse?> Handle(GetFieldByIdQuery query);
-    Task<FieldResponse?> Handle(GetFieldByUserIdQuery query);
-    Task<Field?> GetFieldByUserIdDirectAsync(int userId);
+    Task<List<FieldResponse>?> Handle(GetFieldsByUserIdQuery query);
+    Task<FieldResponse?> Handle(GetFieldByNameQuery query);
+    
+    Task<FieldResponse?> FindFieldByNameAsync(string fieldName);
     
 }

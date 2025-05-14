@@ -83,12 +83,12 @@ public class CropController : ControllerBase
     }
     
     // GET: api/Crop/field/id
-    /// <summary>Obtain the active crop for a specific field</summary>
+    /// <summary>Obtain the active crops for a specific field</summary>
     /// <param name="fieldId">Field ID</param>
     /// <response code="200">Returns the crop for the field</response>
     /// <response code="404">If no crop is found for the field</response>
     /// <response code="500">If there is an internal server error</response>
-    [HttpGet("field/{fieldId}", Name = "GetCropByFieldId")]
+    [HttpGet("field/{fieldId}", Name = "GetCropsByFieldId")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(CropResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -98,7 +98,7 @@ public class CropController : ControllerBase
     {
         try
         {
-            var result = await _cropQueryService.Handle(new GetCropByFieldId(fieldId));
+            var result = await _cropQueryService.Handle(new GetCropsByFieldId(fieldId));
 
             if (result == null)
                 return NotFound();
@@ -114,13 +114,14 @@ public class CropController : ControllerBase
     
     // POST: api/Crop
     /// <summary>
-    /// Crea un nuevo Crop para el campo del usuario autenticado.
+    /// Crea un nuevo Crop para un campo específico.
     /// </summary>
     /// <remarks>
     /// Ejemplo de solicitud:
     ///
     ///     POST /api/Crop
     ///     {
+    ///        "fieldName": "Field1",
     ///        "cropType": "Wheat",
     ///        "quantity": 100,
     ///        "status": "Active"
@@ -131,26 +132,21 @@ public class CropController : ControllerBase
     /// <returns>El ID del cultivo recién creado</returns>
     /// <response code="201">Devuelve el ID del cultivo creado</response>
     /// <response code="400">Si el cultivo tiene propiedades inválidas</response>
-    /// <response code="404">Si no se encuentra un campo para el usuario</response>
+    /// <response code="404">Si no se encuentra un campo con el nombre especificado</response>
     /// <response code="500">Si ocurre un error inesperado</response>
     [HttpPost]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PostAsync([FromBody] CreateCropCommand command)
     {
-        var user = HttpContext.Items["User"] as User;
-        if (user == null) return Unauthorized();
-
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        // Obtener el campo asociado al usuario
-        var field = await _fieldQueryService.GetFieldByUserIdDirectAsync(user.Id);
-        if (field == null) return NotFound("No se encontró un campo asociado al usuario.");
+        var field = await _fieldQueryService.FindFieldByNameAsync(command.FieldName);
+        if (field == null) return NotFound("No se encontró un campo con el nombre especificado.");
 
-        // Asignar el FieldId al comando
         command.FieldId = field.Id;
 
         // Crear el cultivo
-        var result = await _cropCommandService.Handle(command, user.Id);
+        var result = await _cropCommandService.Handle(command);
 
         return StatusCode(StatusCodes.Status201Created, result);
     }

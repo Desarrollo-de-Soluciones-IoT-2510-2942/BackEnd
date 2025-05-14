@@ -1,3 +1,3 @@
 ﻿namespace NutriControl.Domain.Fields.Models.Queries;
 
-public record GetFieldByUserIdQuery(int UserId);
+public record GetFieldsByUserIdQuery(int UserId);

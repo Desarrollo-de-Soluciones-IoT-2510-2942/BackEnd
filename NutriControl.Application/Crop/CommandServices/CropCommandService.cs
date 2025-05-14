@@ -17,8 +17,9 @@ public class CropCommandService : ICropCommandService
         _mapper = mapper;
     }
 
-    public async Task<int> Handle(CreateCropCommand command, int userId)
+    public async Task<int> Handle(CreateCropCommand command)
     {
+        
         // Mapear el comando a la entidad Crop
         var crop = _mapper.Map<CreateCropCommand, Crop>(command);
 

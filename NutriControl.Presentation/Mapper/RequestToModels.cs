@@ -15,8 +15,12 @@ public class RequestToModels : Profile
 
         CreateMap<SingupCommand, User>();
         CreateMap<SigninCommand, User>();
+        CreateMap<UpdateUserCommand, User>();
         CreateMap<CreateSubscriptionCommand, Subscription>();
+        CreateMap<UpdateSubscriptionCommand, Subscription>();
         CreateMap<CreateFieldCommand, Field>();
+        CreateMap<UpdateFieldCommand, Field>();
         CreateMap<CreateCropCommand, Crop>();
+        CreateMap<UpdateCropCommand, Crop>();
     }
 }

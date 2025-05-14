@@ -9,4 +9,6 @@ public interface IUserRepository
     Task<List<User>> GetUserRoleSearchAsync(string role);
     Task<User> GetUserByDniOrRucAsync(string dniOrRuc );
     Task<bool> DeleteUserAsync(int id);
+    
+    Task<bool> UpdateUserAsync(User dataUser, int id);
 }

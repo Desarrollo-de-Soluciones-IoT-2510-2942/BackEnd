@@ -47,7 +47,7 @@ namespace NutriControl.Presentation.IAM.Controllers
         [ProducesResponseType(typeof(void),StatusCodes.Status500InternalServerError)]
         [Produces(MediaTypeNames.Application.Json)]
         //[AllowAnonymous]
-        [CustomAuthorize("Admin")]
+        [CustomAuthorize("Farmer")]
         [Route("getall")]
         public async Task<IActionResult> GetAsync()
         {
@@ -132,6 +132,46 @@ namespace NutriControl.Presentation.IAM.Controllers
         }
         
         
+        // PUT: api/v1/User/id
+        /// <summary>
+        /// Actualiza un usuario existente por su ID.
+        /// </summary>
+        /// <remarks>
+        /// Ejemplo de solicitud:
+        ///
+        ///     PUT /api/v1/User/5
+        ///     {
+        ///        "username": "Usuario Actualizado",
+        ///        "DniOrRuc": "12345678",
+        ///        "emailAddress": "nuevoemail@example.com",
+        ///        "phone": "809123456",
+        ///      
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="id">El ID del usuario a actualizar</param>
+        /// <param name="command">Los datos actualizados del usuario</param>
+        /// <response code="200">Usuario actualizado exitosamente</response>
+        /// <response code="400">Si el usuario tiene propiedades inválidas</response>
+        /// <response code="404">Si el usuario no se encuentra</response>
+        /// <response code="500">Si ocurre un error inesperado</response>
+        [HttpPut("{id}")]
+        [CustomAuthorize("Farmer")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateUserCommand command)
+        {
+            command.Id = id;
+            if (!ModelState.IsValid) return StatusCode(StatusCodes.Status400BadRequest);
+
+            var result = await _userCommandService.Handle(command);
+
+            if (!result) return NotFound();
+
+            return Ok();
+        }
+        
+        
+        
+        
         // DELETE: api/v1/User/5
         ///<summary>Obtain all the active User</summary>
         /// <remarks>
@@ -145,7 +185,7 @@ namespace NutriControl.Presentation.IAM.Controllers
         [ProducesResponseType(typeof(void),StatusCodes.Status500InternalServerError)]
         [Produces(MediaTypeNames.Application.Json)]
         [HttpDelete("{id}")]
-        [CustomAuthorize("Admin")]
+        [CustomAuthorize("Farmer")]
         public async Task<IActionResult>DeleteAsync(int id)
         {
             DeleteUserCommand command = new DeleteUserCommand { Id = id };

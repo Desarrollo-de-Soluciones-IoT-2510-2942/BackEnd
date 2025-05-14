@@ -54,6 +54,23 @@ public class UserRepository : IUserRepository
             .FirstOrDefaultAsync();
     }
 
+    
+    public async Task<bool> UpdateUserAsync(User dataUser, int id)
+    {
+        var existing = await _nutriControlContext.Users.FirstOrDefaultAsync(f => f.Id == id);
+        if (existing == null) return false;
+
+        existing.Username = dataUser.Username;
+        existing.DniOrRuc = dataUser.DniOrRuc;
+        existing.EmailAddress = dataUser.EmailAddress;
+        existing.Phone = dataUser.Phone;
+
+        _nutriControlContext.Users.Update(existing);
+        await _nutriControlContext.SaveChangesAsync();
+        return true;
+    }
+    
+    
     public async Task<bool> DeleteUserAsync(int id)
     {
         var exitingAccount = await _nutriControlContext.Users.FirstOrDefaultAsync(t => t.Id == id);

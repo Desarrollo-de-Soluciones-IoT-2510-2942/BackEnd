@@ -1,4 +1,5 @@
 using System.Data;
+using AutoMapper;
 using Domain;
 
 using NutriControl.Domain.IAM.Models.Comands;
@@ -14,12 +15,15 @@ public class UserCommandService : IUserCommandService
     private readonly IUserRepository _userRepository;
     private readonly IEncryptService _encryptService;
     private readonly ITokenService _tokenService;
+    private readonly IMapper _mapper;
     
-    public UserCommandService(IUserRepository userRepository,IEncryptService encryptService,ITokenService tokenService)
+    public UserCommandService(IUserRepository userRepository,IEncryptService encryptService,ITokenService tokenService,
+        IMapper mapper)
     {
         _userRepository = userRepository;
         _encryptService = encryptService;
         _tokenService = tokenService;
+        _mapper = mapper;
     }
     
     public async Task<string> Handle(SigninCommand command)
@@ -60,6 +64,26 @@ public class UserCommandService : IUserCommandService
         };
         
         var result = await _userRepository.RegisterAsync(user);
+        return result;
+    }
+    
+    
+    public async Task<bool> Handle(UpdateUserCommand command)
+    {
+        // Buscar el usuario existente por ID
+        var existingUser = await _userRepository.GetUserByIdAsync(command.Id);
+        if (existingUser == null)
+        {
+            throw new NotException("User not found");
+        }
+
+        // Mapear los datos del comando al modelo de usuario
+        var updatedUser = _mapper.Map<UpdateUserCommand, User>(command);
+
+        // Actualizar el usuario en el repositorio
+        var result = await _userRepository.UpdateUserAsync(updatedUser, command.Id);
+
+        // Retornar el resultado
         return result;
     }
     

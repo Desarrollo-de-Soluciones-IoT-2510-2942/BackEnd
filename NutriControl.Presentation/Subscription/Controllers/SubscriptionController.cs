@@ -114,18 +114,16 @@ public class SubscriptionController : ControllerBase
 
     
 
-    // POST: api/Subscription
     /// <summary>
-    /// Creates a new Subscription for the authenticated user.
+    /// Crea una nueva suscripción para el usuario autenticado.
     /// </summary>
     /// <remarks>
-    /// /// <remarks>
     /// Valores para `planType`:
     /// - 0: Basic
     /// - 1: Standard
     /// - 2: Premium
-    /// 
-    /// Sample request:
+    ///
+    /// Ejemplo de solicitud:
     ///
     ///     POST /api/Subscription
     ///     {
@@ -133,14 +131,13 @@ public class SubscriptionController : ControllerBase
     ///        "startDate": "2024-06-01T00:00:00",
     ///        "endDate": "2024-12-01T00:00:00"
     ///     }
-    ///
     /// </remarks>
-    /// <param name="command">The subscription to create</param>
-    /// <returns>The ID of the newly created subscription</returns>
-    /// <response code="201">Returns the ID of the created subscription</response>
-    /// <response code="400">If the subscription has invalid properties</response>
-    /// <response code="409">Error validating data</response>
-    /// <response code="500">Unexpected error</response>
+    /// <param name="command">La suscripción a crear</param>
+    /// <returns>El ID de la suscripción recién creada</returns>
+    /// <response code="201">Devuelve el ID de la suscripción creada</response>
+    /// <response code="400">Si la suscripción tiene propiedades inválidas</response>
+    /// <response code="409">Error al validar los datos</response>
+    /// <response code="500">Error inesperado</response>
     [HttpPost]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PostAsync([FromBody] CreateSubscriptionCommand command)

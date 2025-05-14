@@ -188,7 +188,32 @@
             <response code="404">If no subscription is found for the user</response>
             <response code="500">If there is an internal server error</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Presentation.Controllers.SubscriptionController.PostAsync(Presentation.Request.CreateSubscriptionCommand)" -->
+        <member name="M:Presentation.Controllers.SubscriptionController.PostAsync(Presentation.Request.CreateSubscriptionCommand)">
+             <summary>
+             Crea una nueva suscripción para el usuario autenticado.
+             </summary>
+             <remarks>
+             Valores para `planType`:
+             - 0: Basic
+             - 1: Standard
+             - 2: Premium
+            
+             Ejemplo de solicitud:
+            
+                 POST /api/Subscription
+                 {
+                    "planType": "Basic",
+                    "startDate": "2024-06-01T00:00:00",
+                    "endDate": "2024-12-01T00:00:00"
+                 }
+             </remarks>
+             <param name="command">La suscripción a crear</param>
+             <returns>El ID de la suscripción recién creada</returns>
+             <response code="201">Devuelve el ID de la suscripción creada</response>
+             <response code="400">Si la suscripción tiene propiedades inválidas</response>
+             <response code="409">Error al validar los datos</response>
+             <response code="500">Error inesperado</response>
+        </member>
         <member name="M:Presentation.Controllers.SubscriptionController.PutAsync(System.Int32,Presentation.Request.UpdateSubscriptionCommand)">
              <summary>
              Updates an existing Subscription by its ID.
@@ -276,6 +301,30 @@
              <response code="400">If the User has invalid property</response>
              <response code="409">Error validating data</response>
              <response code="500">Unexpected error</response>
+        </member>
+        <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.PutAsync(System.Int32,NutriControl.Domain.IAM.Models.Comands.UpdateUserCommand)">
+             <summary>
+             Actualiza un usuario existente por su ID.
+             </summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 PUT /api/v1/User/5
+                 {
+                    "username": "Usuario Actualizado",
+                    "DniOrRuc": "12345678",
+                    "emailAddress": "nuevoemail@example.com",
+                    "phone": "809123456",
+                  
+                 }
+            
+             </remarks>
+             <param name="id">El ID del usuario a actualizar</param>
+             <param name="command">Los datos actualizados del usuario</param>
+             <response code="200">Usuario actualizado exitosamente</response>
+             <response code="400">Si el usuario tiene propiedades inválidas</response>
+             <response code="404">Si el usuario no se encuentra</response>
+             <response code="500">Si ocurre un error inesperado</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.DeleteAsync(System.Int32)">
             <summary>Obtain all the active User</summary>

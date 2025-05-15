@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Domain;
 
 namespace Presentation.Request;
 
 public class UpdateSubscriptionCommand
 {
+    [JsonIgnore] 
     public int Id { get; set; }
 
     [Required(ErrorMessage = "El tipo de plan es obligatorio.")]

@@ -27,6 +27,8 @@ public class NutriControlContext : DbContext
     public DbSet<Field> Fields { get; set; }
     
     public DbSet<Crop> Crops { get; set; }
+    
+    public DbSet<Recommendation> Recommendations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -79,6 +81,14 @@ public class NutriControlContext : DbContext
         builder.Entity<Crop>().Property(c => c.Quantity).IsRequired();
         builder.Entity<Crop>().Property(c => c.Status).IsRequired().HasMaxLength(50);
         builder.Entity<Crop>().Property(f => f.IsActive).IsRequired().HasDefaultValue(true);
+        
+        builder.Entity<Recommendation>().ToTable("Recommendation");
+        builder.Entity<Recommendation>().HasKey(r => r.Id);
+        builder.Entity<Recommendation>().Property(r => r.CropId).IsRequired();
+        builder.Entity<Recommendation>().Property(r => r.Content).IsRequired().HasMaxLength(500);
+        builder.Entity<Recommendation>().Property(r => r.Type).IsRequired().HasMaxLength(30);
+        builder.Entity<Recommendation>().Property(r => r.Priority).IsRequired();
+        builder.Entity<Recommendation>().Property(r => r.IsActive).IsRequired().HasDefaultValue(true);
         
         
         

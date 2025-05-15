@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriControl.Application", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriControl.Shared", "NutriControl.Shared\NutriControl.Shared.csproj", "{BF48C676-9ECE-482D-A0EE-48CE00639E91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriControl.Application.Test", "NutriControl.Application.Test\NutriControl.Application.Test.csproj", "{06BD6C39-02F0-480A-BE0B-E972D7B1CDCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriControl.Presentation.Test", "NutriControl.Presentation.Test\NutriControl.Presentation.Test.csproj", "{DF72489E-6D21-45D0-ACBF-46FBAB4E3139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,14 @@ Global
 		{BF48C676-9ECE-482D-A0EE-48CE00639E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF48C676-9ECE-482D-A0EE-48CE00639E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF48C676-9ECE-482D-A0EE-48CE00639E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BD6C39-02F0-480A-BE0B-E972D7B1CDCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BD6C39-02F0-480A-BE0B-E972D7B1CDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BD6C39-02F0-480A-BE0B-E972D7B1CDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BD6C39-02F0-480A-BE0B-E972D7B1CDCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF72489E-6D21-45D0-ACBF-46FBAB4E3139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF72489E-6D21-45D0-ACBF-46FBAB4E3139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF72489E-6D21-45D0-ACBF-46FBAB4E3139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF72489E-6D21-45D0-ACBF-46FBAB4E3139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

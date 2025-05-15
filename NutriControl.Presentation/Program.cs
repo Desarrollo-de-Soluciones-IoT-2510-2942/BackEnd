@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using NutriControl.Contexts;
 using NutriControl.Domain.IAM.Repositories;
 using NutriControl.Domain.IAM.Services;
+using NutriControl.Infraestructure.Crop.Persistence;
 using NutriControl.Infraestructure.IAM.Persistence;
 using NutriControl.Presentation.Middleware;
 
@@ -99,6 +100,8 @@ builder.Services.AddScoped<IFieldQueryService, FieldQueryService>();
 builder.Services.AddScoped<ICropRepository, CropRepository>();
 builder.Services.AddScoped<ICropCommandService, CropCommandService>();
 builder.Services.AddScoped<ICropQueryService, CropQueryService>();
+
+
 
 
 

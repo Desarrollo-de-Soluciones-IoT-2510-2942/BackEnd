@@ -36,4 +36,19 @@ public class CropQueryService: ICropQueryService
         var result = _mapper.Map<List<Crop>, List<CropResponse>>(data);
         return result;
     }
+    
+    
+    public async Task<Recommendation?> Handle(GetRecommendationByIdQuery query)
+    {
+        var data = await _cropRepository.GetRecommendationByIdAsync(query.Id);
+        return data;
+    }
+    
+    public async Task<List<RecommendationResponse>?> Handle(GetAllRecomendationsForCropQuery query)
+    {
+        var data = await _cropRepository.GetRecommendationsByCropIdAsync(query.cropId);
+        var result = _mapper.Map<List<Recommendation>, List<RecommendationResponse>>(data);
+        return result;
+    }
+    
 }

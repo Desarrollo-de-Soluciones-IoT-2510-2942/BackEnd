@@ -53,4 +53,36 @@ public class CropCommandService : ICropCommandService
     {
         return await _cropRepository.FieldExistsAsync(fieldId);
     }
+    
+    
+    public async Task<int> Handle(CreateRecommendationCommand command)
+    {
+        var recommendation = _mapper.Map<CreateRecommendationCommand, Recommendation>(command);
+
+        // Verificar si la recomendacion ya existe
+        var existingRecommendation = await _cropRepository.GetRecommendationByIdAsync(recommendation.Id);
+        if (existingRecommendation != null)
+            throw new DuplicateNameException("La recoemndacion ya existe.");
+
+        // Guardar el cultivo
+        return await _cropRepository.SaveRecommendationAsync(recommendation);
+    }
+    
+    public async Task<bool> Handle(UpdateRecommendationCommand command)
+    {
+        var existingRecommendation = await _cropRepository.GetRecommendationByIdAsync(command.Id);
+        var recommendation = _mapper.Map<UpdateRecommendationCommand, Recommendation>(command);
+
+        if (existingRecommendation == null) throw new NotException("Crop not found");
+
+        return await _cropRepository.UpdateRecommendationAsync(recommendation, recommendation.Id);
+    }
+    
+    public async Task<bool> Handle(DeleteRecommendationCommand command)
+    {
+        var existingRecommendation = await _cropRepository.GetRecommendationByIdAsync(command.Id);
+        if (existingRecommendation == null) throw new NotException("Crop not found");
+        return await _cropRepository.DeleteRecommendationAsync(command.Id);
+    }
+    
 }

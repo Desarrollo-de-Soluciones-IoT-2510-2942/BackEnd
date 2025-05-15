@@ -207,4 +207,172 @@ public class CropController : ControllerBase
 
         return Ok();
     }
+    
+    
+    
+    
+    // GET: api/Crop/recommendation/{id}
+    /// <summary>Obtain a recommendation by its ID</summary>
+    /// <param name="id">Recommendation ID</param>
+    /// <response code="200">Returns the recommendation</response>
+    /// <response code="404">If the recomendation is not found</response>
+    /// <response code="500">If there is an internal server error</response>
+    [HttpGet("recommendation/{id}")]
+    [CustomAuthorize("Farmer")]
+    [ProducesResponseType(typeof(RecommendationResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+    [Produces(MediaTypeNames.Application.Json)]
+    public async Task<IActionResult> GetRecommendationByIdAsync(int id)
+    {
+        try
+        {
+            var result = await _cropQueryService.Handle(new GetRecommendationByIdQuery(id));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+    
+    
+    // GET: api/Crop/{cropId}/recommendations
+    /// <summary>Obtain the active recommendations for a specific crop</summary>
+    /// <param name="cropId">Crop ID</param>
+    /// <response code="200">Returns the recommendation for the crop</response>
+    /// <response code="404">If no recommendation is found for the crop</response>
+    /// <response code="500">If there is an internal server error</response>
+    [HttpGet("{cropId}/recommendations")]
+    [CustomAuthorize("Farmer")]
+    [ProducesResponseType(typeof(RecommendationResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+    [Produces(MediaTypeNames.Application.Json)]
+    public async Task<IActionResult> GetRecommendationsByCropIdAsync(int cropId)
+    {
+        try
+        {
+            var result = await _cropQueryService.Handle(new GetAllRecomendationsForCropQuery(cropId));
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    // POST: api/Crop/{cropId}/recommendation
+    /// <summary>
+    /// Crea una nueva recomendación para un cultivo específico.
+    /// </summary>
+    /// <remarks>
+    /// Ejemplo de solicitud:
+    ///
+    ///     POST /api/Crop/5/recommendation
+    ///     {
+    ///        "content": "Aplicar fertilizante",
+    ///        "type": "General",
+    ///        "priority": 2,
+    ///        "generatedDate": "2024-06-01T00:00:00"
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="cropId">ID del cultivo asociado</param>
+    /// <param name="command">Datos de la recomendación a crear</param>
+    /// <returns>ID de la recomendación recién creada</returns>
+    /// <response code="201">Devuelve el ID de la recomendación creada</response>
+    /// <response code="400">Si la recomendación tiene propiedades inválidas</response>
+    /// <response code="404">Si no se encuentra el cultivo especificado</response>
+    /// <response code="500">Si ocurre un error inesperado</response>
+    [HttpPost("{cropId}/recommendation")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> CreateRecommendationAsync(int cropId, [FromBody] CreateRecommendationCommand command)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        command.CropId = cropId;
+
+        var result = await _cropCommandService.Handle(command);
+
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
+    
+    // PUT: api/Crop/recommendation/{id}
+    /// <summary>
+    /// Actualiza una recomendación existente por su ID.
+    /// </summary>
+    /// <remarks>
+    /// Ejemplo de solicitud:
+    ///
+    ///     {
+    ///        "content": "Nueva recomendación",
+    ///        "type": "General",
+    ///        "priority": 3
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="id">ID de la recomendación a actualizar</param>
+    /// <param name="command">Datos actualizados de la recomendación</param>
+    /// <response code="200">Recomendación actualizada correctamente</response>
+    /// <response code="400">Si la recomendación tiene propiedades inválidas</response>
+    /// <response code="404">Si la recomendación no se encuentra</response>
+    /// <response code="500">Error inesperado</response>
+    [HttpPut("recommendation/{id}")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> UpdateRecommendationAsync(int id, [FromBody] UpdateRecommendationCommand command)
+    {
+        command.Id = id;
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var result = await _cropCommandService.Handle(command);
+
+        if (!result) return NotFound();
+
+        return Ok();
+    }
+    
+    
+    
+    
+    // DELETE: api/Crop/recommendation/{id}
+    /// <summary>
+    /// Elimina una recomendación por su ID.
+    /// </summary>
+    /// <param name="id">ID de la recomendación a eliminar</param>
+    /// <response code="200">Recomendación eliminada correctamente</response>
+    /// <response code="404">Si la recomendación no se encuentra</response>
+    /// <response code="500">Error inesperado</response>
+    [HttpDelete("recommendation/{id}")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> DeleteRecommendationAsync(int id)
+    {
+        var command = new DeleteRecommendationCommand { Id = id };
+
+        var result = await _cropCommandService.Handle(command);
+
+        if (!result) return NotFound();
+
+        return Ok();
+    }
+
+    
+    
+    
+    
+    
 }

@@ -22,5 +22,7 @@ public class RequestToModels : Profile
         CreateMap<UpdateFieldCommand, Field>();
         CreateMap<CreateCropCommand, Crop>();
         CreateMap<UpdateCropCommand, Crop>();
+        CreateMap<CreateRecommendationCommand, Recommendation>();
+        CreateMap<UpdateRecommendationCommand, Recommendation>();
     }
 }

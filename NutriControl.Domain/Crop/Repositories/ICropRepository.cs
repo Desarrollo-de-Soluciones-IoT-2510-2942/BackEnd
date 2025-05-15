@@ -15,4 +15,12 @@ public interface ICropRepository
     Task<bool> DeleteCropAsync(int id);
     
     Task<bool> FieldExistsAsync(int fieldId);
+    
+    
+    Task<int>  SaveRecommendationAsync(Recommendation dataRecommendation);
+    Task<bool> UpdateRecommendationAsync(Recommendation dataRecommendation, int id);
+    Task<bool> DeleteRecommendationAsync(int id);
+    Task<List<Recommendation>> GetRecommendationsByCropIdAsync(int cropId);
+    Task<Recommendation> GetRecommendationByIdAsync(int id);
+    
 }

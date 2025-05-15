@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Presentation.Request;
 
 public class UpdateFieldCommand
 {
+    [JsonIgnore] 
     public int Id { get; set; }
     
     [Required(ErrorMessage = "El nombre es obligatorio.")]

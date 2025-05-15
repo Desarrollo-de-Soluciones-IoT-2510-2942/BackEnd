@@ -9,4 +9,9 @@ public interface ICropCommandService
     Task<bool> Handle(DeleteCropCommand command); 
     
     Task<bool> FieldExistsAsync(int fieldId);
+    
+    Task<int> Handle(CreateRecommendationCommand command);
+    Task<bool> Handle(UpdateRecommendationCommand command);
+    Task<bool> Handle(DeleteRecommendationCommand command);
+    
 }

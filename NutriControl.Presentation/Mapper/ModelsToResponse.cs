@@ -15,6 +15,7 @@ public class ModelsToResponse : Profile
         CreateMap<Subscription, SubscriptionResponse>();
         CreateMap<Field, FieldResponse>();
         CreateMap<Crop, CropResponse>();
+        CreateMap<Recommendation, RecommendationResponse>();
 
 
     }

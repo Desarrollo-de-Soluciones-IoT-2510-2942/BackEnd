@@ -4,10 +4,7 @@ using Application;
 using Infraestructure;
 using AutoMapper;
 using Domain;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
 using NutriControl.Domain.Subscriptions.Models.Queries;
 using NutriControl.Presentation.Filters;
 using Presentation.Request;
@@ -30,15 +27,14 @@ public class SubscriptionController : ControllerBase
         _mapper = mapper;
     }
 
-
     // GET: api/Subscription
-    /// <summary>Obtain all the active subscriptions</summary>
+    /// <summary>Obtiene todas las suscripciones activas.</summary>
     /// <remarks>
     /// GET /api/Subscription
     /// </remarks>
-    /// <response code="200">Returns all the subscriptions</response>
-    /// <response code="404">If there are no subscriptions</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <response code="200">Devuelve todas las suscripciones.</response>
+    /// <response code="404">Si no hay suscripciones.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet]
     [ProducesResponseType(typeof(List<SubscriptionResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -48,18 +44,18 @@ public class SubscriptionController : ControllerBase
     public async Task<IActionResult> GetAsync()
     {
         var result = await _subscriptionQueryService.Handle(new GetAllSusbcriptionsQuery());
-        
+
         if (result.Count == 0) return NotFound();
 
         return Ok(result);
     }
 
     // GET: api/Subscription/id
-    /// <summary>Obtain a subscription by its ID</summary>
-    /// <param name="id">Subscription ID</param>
-    /// <response code="200">Returns the subscription</response>
-    /// <response code="404">If the subscription is not found</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <summary>Obtiene una suscripción por su ID.</summary>
+    /// <param name="id">ID de la suscripción.</param>
+    /// <response code="200">Devuelve la suscripción.</response>
+    /// <response code="404">Si la suscripción no se encuentra.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("{id}", Name = "GetSubscriptionById")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(SubscriptionResponse), StatusCodes.Status200OK)]
@@ -82,13 +78,13 @@ public class SubscriptionController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    
-    // GET: api/Subscription/userid
-    /// <summary>Obtain the active subscription for a specific user</summary>
-    /// <param name="userId">User ID</param>
-    /// <response code="200">Returns the subscription for the user</response>
-    /// <response code="404">If no subscription is found for the user</response>
-    /// <response code="500">If there is an internal server error</response>
+
+    // GET: api/Subscription/user/{userId}
+    /// <summary>Obtiene la suscripción activa de un usuario específico.</summary>
+    /// <param name="userId">ID del usuario.</param>
+    /// <response code="200">Devuelve la suscripción del usuario.</response>
+    /// <response code="404">Si no se encuentra una suscripción para el usuario.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("user/{userId}", Name = "GetSubscriptionByUserId")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(SubscriptionResponse), StatusCodes.Status200OK)]
@@ -112,32 +108,31 @@ public class SubscriptionController : ControllerBase
         }
     }
 
-    
-
+    // POST: api/Subscription
     /// <summary>
     /// Crea una nueva suscripción para el usuario autenticado.
     /// </summary>
     /// <remarks>
     /// Valores para `planType`:
-    /// - 0: Basic
-    /// - 1: Standard
+    /// - 0: Básico
+    /// - 1: Estándar
     /// - 2: Premium
     ///
     /// Ejemplo de solicitud:
     ///
     ///     POST /api/Subscription
     ///     {
-    ///        "planType": "Basic",
+    ///        "planType": "Básico",
     ///        "startDate": "2024-06-01T00:00:00",
     ///        "endDate": "2024-12-01T00:00:00"
     ///     }
     /// </remarks>
-    /// <param name="command">La suscripción a crear</param>
-    /// <returns>El ID de la suscripción recién creada</returns>
-    /// <response code="201">Devuelve el ID de la suscripción creada</response>
-    /// <response code="400">Si la suscripción tiene propiedades inválidas</response>
-    /// <response code="409">Error al validar los datos</response>
-    /// <response code="500">Error inesperado</response>
+    /// <param name="command">Datos de la suscripción a crear.</param>
+    /// <returns>ID de la suscripción recién creada.</returns>
+    /// <response code="201">Devuelve el ID de la suscripción creada.</response>
+    /// <response code="400">Si la suscripción tiene propiedades inválidas.</response>
+    /// <response code="409">Error al validar los datos.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpPost]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PostAsync([FromBody] CreateSubscriptionCommand command)
@@ -145,7 +140,6 @@ public class SubscriptionController : ControllerBase
         var user = HttpContext.Items["User"] as User;
         if (user == null) return Unauthorized();
 
-        // Asignar el UserId al comando
         command.UserId = user.Id;
 
         if (!ModelState.IsValid) return BadRequest();
@@ -154,30 +148,27 @@ public class SubscriptionController : ControllerBase
 
         return StatusCode(StatusCodes.Status201Created, result);
     }
-    
-    
 
-    // PUT: api/Subscription/id
+    // PUT: api/Subscription/{id}
     /// <summary>
-    /// Updates an existing Subscription by its ID.
+    /// Actualiza una suscripción existente por su ID.
     /// </summary>
     /// <remarks>
-    /// Sample request:
+    /// Ejemplo de solicitud:
     ///
     ///     PUT /api/Subscription/5
     ///     {
-    ///        "planType": "Standard",
+    ///        "planType": "Estándar",
     ///        "startDate": "2024-07-01T00:00:00",
     ///        "endDate": "2024-12-31T00:00:00"
     ///     }
-    ///
     /// </remarks>
-    /// <param name="id">The ID of the subscription to update</param>
-    /// <param name="command">The updated subscription data</param>
-    /// <response code="200">Subscription updated successfully</response>
-    /// <response code="400">If the subscription has invalid properties</response>
-    /// <response code="404">If the subscription is not found</response>
-    /// <response code="500">Unexpected error</response>
+    /// <param name="id">ID de la suscripción a actualizar.</param>
+    /// <param name="command">Datos actualizados de la suscripción.</param>
+    /// <response code="200">Suscripción actualizada correctamente.</response>
+    /// <response code="400">Si la suscripción tiene propiedades inválidas.</response>
+    /// <response code="404">Si la suscripción no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpPut("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateSubscriptionCommand command)
@@ -192,14 +183,14 @@ public class SubscriptionController : ControllerBase
         return Ok();
     }
 
-    // DELETE: api/Subscription/5
+    // DELETE: api/Subscription/{id}
     /// <summary>
-    /// Deletes a subscription by its ID.
+    /// Elimina una suscripción por su ID.
     /// </summary>
-    /// <param name="id">The ID of the subscription to delete</param>
-    /// <response code="200">Subscription deleted successfully</response>
-    /// <response code="404">If the subscription is not found</response>
-    /// <response code="500">Unexpected error</response>
+    /// <param name="id">ID de la suscripción a eliminar.</param>
+    /// <response code="200">Suscripción eliminada correctamente.</response>
+    /// <response code="404">Si la suscripción no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpDelete("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> DeleteAsync(int id)

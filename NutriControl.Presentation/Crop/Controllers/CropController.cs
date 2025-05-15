@@ -29,15 +29,14 @@ public class CropController : ControllerBase
         _mapper = mapper;
     }
 
-
     // GET: api/Crop
-    /// <summary>Obtain all the active crops</summary>
+    /// <summary>Obtiene todos los cultivos activos.</summary>
     /// <remarks>
     /// GET /api/Crop
     /// </remarks>
-    /// <response code="200">Returns all the crops</response>
-    /// <response code="404">If there are no crops</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <response code="200">Devuelve todos los cultivos.</response>
+    /// <response code="404">Si no hay cultivos.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet]
     [ProducesResponseType(typeof(List<CropResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -54,11 +53,11 @@ public class CropController : ControllerBase
     }
 
     // GET: api/Crop/id
-    /// <summary>Obtain a crop by its ID</summary>
-    /// <param name="id">Crop ID</param>
-    /// <response code="200">Returns the crop</response>
-    /// <response code="404">If the crop is not found</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <summary>Obtiene un cultivo por su ID.</summary>
+    /// <param name="id">ID del cultivo.</param>
+    /// <response code="200">Devuelve el cultivo.</response>
+    /// <response code="404">Si el cultivo no se encuentra.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("{id}", Name = "GetCropById")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(CropResponse), StatusCodes.Status200OK)]
@@ -83,11 +82,11 @@ public class CropController : ControllerBase
     }
     
     // GET: api/Crop/field/id
-    /// <summary>Obtain the active crops for a specific field</summary>
-    /// <param name="fieldId">Field ID</param>
-    /// <response code="200">Returns the crop for the field</response>
-    /// <response code="404">If no crop is found for the field</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <summary>Obtiene los cultivos activos para un campo específico.</summary>
+    /// <param name="fieldId">ID del campo.</param>
+    /// <response code="200">Devuelve los cultivos del campo.</response>
+    /// <response code="404">Si no se encuentra ningún cultivo para el campo.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("field/{fieldId}", Name = "GetCropsByFieldId")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(CropResponse), StatusCodes.Status200OK)]
@@ -111,29 +110,28 @@ public class CropController : ControllerBase
         }
     }
 
-    
     // POST: api/Crop
     /// <summary>
-    /// Crea un nuevo Crop para un campo específico.
+    /// Crea un nuevo cultivo para un campo específico.
     /// </summary>
     /// <remarks>
     /// Ejemplo de solicitud:
     ///
     ///     POST /api/Crop
     ///     {
-    ///        "fieldName": "Field1",
-    ///        "cropType": "Wheat",
+    ///        "fieldName": "Campo1",
+    ///        "cropType": "Trigo",
     ///        "quantity": 100,
-    ///        "status": "Active"
+    ///        "status": "Activo"
     ///     }
     ///
     /// </remarks>
-    /// <param name="command">El cultivo a crear</param>
-    /// <returns>El ID del cultivo recién creado</returns>
-    /// <response code="201">Devuelve el ID del cultivo creado</response>
-    /// <response code="400">Si el cultivo tiene propiedades inválidas</response>
-    /// <response code="404">Si no se encuentra un campo con el nombre especificado</response>
-    /// <response code="500">Si ocurre un error inesperado</response>
+    /// <param name="command">El cultivo a crear.</param>
+    /// <returns>El ID del cultivo recién creado.</returns>
+    /// <response code="201">Devuelve el ID del cultivo creado.</response>
+    /// <response code="400">Si el cultivo tiene propiedades inválidas.</response>
+    /// <response code="404">Si no se encuentra un campo con el nombre especificado.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
     [HttpPost]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PostAsync([FromBody] CreateCropCommand command)
@@ -151,28 +149,27 @@ public class CropController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, result);
     }
     
-
     // PUT: api/Crop/id
     /// <summary>
-    /// Updates an existing Crop by its ID.
+    /// Actualiza un cultivo existente por su ID.
     /// </summary>
     /// <remarks>
-    /// Sample request:
+    /// Ejemplo de solicitud:
     ///
     ///     PUT /api/Crop/5
     ///     {
-    ///        "cropType": "Wheat",
+    ///        "cropType": "Trigo",
     ///        "quantity": 150,
-    ///        "status": "Harvested"
+    ///        "status": "Cosechado"
     ///     }
     ///
     /// </remarks>
-    /// <param name="id">The ID of the crop to update</param>
-    /// <param name="command">The updated crop data</param>
-    /// <response code="200">Crop updated successfully</response>
-    /// <response code="400">If the crop has invalid properties</response>
-    /// <response code="404">If the crop is not found</response>
-    /// <response code="500">Unexpected error</response>
+    /// <param name="id">ID del cultivo a actualizar.</param>
+    /// <param name="command">Datos actualizados del cultivo.</param>
+    /// <response code="200">Cultivo actualizado correctamente.</response>
+    /// <response code="400">Si el cultivo tiene propiedades inválidas.</response>
+    /// <response code="404">Si el cultivo no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpPut("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateCropCommand command)
@@ -189,12 +186,12 @@ public class CropController : ControllerBase
 
     // DELETE: api/Crop/5
     /// <summary>
-    /// Deletes a crop by its ID.
+    /// Elimina un cultivo por su ID.
     /// </summary>
-    /// <param name="id">The ID of the crop to delete</param>
-    /// <response code="200">Crop deleted successfully</response>
-    /// <response code="404">If the crop is not found</response>
-    /// <response code="500">Unexpected error</response>
+    /// <param name="id">ID del cultivo a eliminar.</param>
+    /// <response code="200">Cultivo eliminado correctamente.</response>
+    /// <response code="404">Si el cultivo no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpDelete("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> DeleteAsync(int id)
@@ -207,16 +204,13 @@ public class CropController : ControllerBase
 
         return Ok();
     }
-    
-    
-    
-    
+
     // GET: api/Crop/recommendation/{id}
-    /// <summary>Obtain a recommendation by its ID</summary>
-    /// <param name="id">Recommendation ID</param>
-    /// <response code="200">Returns the recommendation</response>
-    /// <response code="404">If the recomendation is not found</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <summary>Obtiene una recomendación por su ID.</summary>
+    /// <param name="id">ID de la recomendación.</param>
+    /// <response code="200">Devuelve la recomendación.</response>
+    /// <response code="404">Si la recomendación no se encuentra.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("recommendation/{id}")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(RecommendationResponse), StatusCodes.Status200OK)]
@@ -240,13 +234,12 @@ public class CropController : ControllerBase
         }
     }
     
-    
     // GET: api/Crop/{cropId}/recommendations
-    /// <summary>Obtain the active recommendations for a specific crop</summary>
-    /// <param name="cropId">Crop ID</param>
-    /// <response code="200">Returns the recommendation for the crop</response>
-    /// <response code="404">If no recommendation is found for the crop</response>
-    /// <response code="500">If there is an internal server error</response>
+    /// <summary>Obtiene las recomendaciones activas para un cultivo específico.</summary>
+    /// <param name="cropId">ID del cultivo.</param>
+    /// <response code="200">Devuelve las recomendaciones del cultivo.</response>
+    /// <response code="404">Si no se encuentra ninguna recomendación para el cultivo.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("{cropId}/recommendations")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(RecommendationResponse), StatusCodes.Status200OK)]
@@ -269,13 +262,7 @@ public class CropController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
     // POST: api/Crop/{cropId}/recommendation
     /// <summary>
     /// Crea una nueva recomendación para un cultivo específico.
@@ -292,13 +279,13 @@ public class CropController : ControllerBase
     ///     }
     ///
     /// </remarks>
-    /// <param name="cropId">ID del cultivo asociado</param>
-    /// <param name="command">Datos de la recomendación a crear</param>
-    /// <returns>ID de la recomendación recién creada</returns>
-    /// <response code="201">Devuelve el ID de la recomendación creada</response>
-    /// <response code="400">Si la recomendación tiene propiedades inválidas</response>
-    /// <response code="404">Si no se encuentra el cultivo especificado</response>
-    /// <response code="500">Si ocurre un error inesperado</response>
+    /// <param name="cropId">ID del cultivo asociado.</param>
+    /// <param name="command">Datos de la recomendación a crear.</param>
+    /// <returns>ID de la recomendación recién creada.</returns>
+    /// <response code="201">Devuelve el ID de la recomendación creada.</response>
+    /// <response code="400">Si la recomendación tiene propiedades inválidas.</response>
+    /// <response code="404">Si no se encuentra el cultivo especificado.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
     [HttpPost("{cropId}/recommendation")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> CreateRecommendationAsync(int cropId, [FromBody] CreateRecommendationCommand command)
@@ -326,12 +313,12 @@ public class CropController : ControllerBase
     ///     }
     ///
     /// </remarks>
-    /// <param name="id">ID de la recomendación a actualizar</param>
-    /// <param name="command">Datos actualizados de la recomendación</param>
-    /// <response code="200">Recomendación actualizada correctamente</response>
-    /// <response code="400">Si la recomendación tiene propiedades inválidas</response>
-    /// <response code="404">Si la recomendación no se encuentra</response>
-    /// <response code="500">Error inesperado</response>
+    /// <param name="id">ID de la recomendación a actualizar.</param>
+    /// <param name="command">Datos actualizados de la recomendación.</param>
+    /// <response code="200">Recomendación actualizada correctamente.</response>
+    /// <response code="400">Si la recomendación tiene propiedades inválidas.</response>
+    /// <response code="404">Si la recomendación no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpPut("recommendation/{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> UpdateRecommendationAsync(int id, [FromBody] UpdateRecommendationCommand command)
@@ -345,18 +332,15 @@ public class CropController : ControllerBase
 
         return Ok();
     }
-    
-    
-    
-    
+
     // DELETE: api/Crop/recommendation/{id}
     /// <summary>
     /// Elimina una recomendación por su ID.
     /// </summary>
-    /// <param name="id">ID de la recomendación a eliminar</param>
-    /// <response code="200">Recomendación eliminada correctamente</response>
-    /// <response code="404">Si la recomendación no se encuentra</response>
-    /// <response code="500">Error inesperado</response>
+    /// <param name="id">ID de la recomendación a eliminar.</param>
+    /// <response code="200">Recomendación eliminada correctamente.</response>
+    /// <response code="404">Si la recomendación no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
     [HttpDelete("recommendation/{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> DeleteRecommendationAsync(int id)
@@ -369,10 +353,4 @@ public class CropController : ControllerBase
 
         return Ok();
     }
-
-    
-    
-    
-    
-    
 }

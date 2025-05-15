@@ -5,95 +5,95 @@
     </assembly>
     <members>
         <member name="M:Presentation.Controllers.CropController.GetAsync">
-            <summary>Obtain all the active crops</summary>
+            <summary>Obtiene todos los cultivos activos.</summary>
             <remarks>
             GET /api/Crop
             </remarks>
-            <response code="200">Returns all the crops</response>
-            <response code="404">If there are no crops</response>
-            <response code="500">If there is an internal server error</response>
+            <response code="200">Devuelve todos los cultivos.</response>
+            <response code="404">Si no hay cultivos.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.GetAsync(System.Int32)">
-            <summary>Obtain a crop by its ID</summary>
-            <param name="id">Crop ID</param>
-            <response code="200">Returns the crop</response>
-            <response code="404">If the crop is not found</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene un cultivo por su ID.</summary>
+            <param name="id">ID del cultivo.</param>
+            <response code="200">Devuelve el cultivo.</response>
+            <response code="404">Si el cultivo no se encuentra.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.GetByFieldIdAsync(System.Int32)">
-            <summary>Obtain the active crops for a specific field</summary>
-            <param name="fieldId">Field ID</param>
-            <response code="200">Returns the crop for the field</response>
-            <response code="404">If no crop is found for the field</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene los cultivos activos para un campo específico.</summary>
+            <param name="fieldId">ID del campo.</param>
+            <response code="200">Devuelve los cultivos del campo.</response>
+            <response code="404">Si no se encuentra ningún cultivo para el campo.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.PostAsync(Presentation.Request.CreateCropCommand)">
              <summary>
-             Crea un nuevo Crop para un campo específico.
+             Crea un nuevo cultivo para un campo específico.
              </summary>
              <remarks>
              Ejemplo de solicitud:
             
                  POST /api/Crop
                  {
-                    "fieldName": "Field1",
-                    "cropType": "Wheat",
+                    "fieldName": "Campo1",
+                    "cropType": "Trigo",
                     "quantity": 100,
-                    "status": "Active"
+                    "status": "Activo"
                  }
             
              </remarks>
-             <param name="command">El cultivo a crear</param>
-             <returns>El ID del cultivo recién creado</returns>
-             <response code="201">Devuelve el ID del cultivo creado</response>
-             <response code="400">Si el cultivo tiene propiedades inválidas</response>
-             <response code="404">Si no se encuentra un campo con el nombre especificado</response>
-             <response code="500">Si ocurre un error inesperado</response>
+             <param name="command">El cultivo a crear.</param>
+             <returns>El ID del cultivo recién creado.</returns>
+             <response code="201">Devuelve el ID del cultivo creado.</response>
+             <response code="400">Si el cultivo tiene propiedades inválidas.</response>
+             <response code="404">Si no se encuentra un campo con el nombre especificado.</response>
+             <response code="500">Si ocurre un error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.PutAsync(System.Int32,Presentation.Request.UpdateCropCommand)">
              <summary>
-             Updates an existing Crop by its ID.
+             Actualiza un cultivo existente por su ID.
              </summary>
              <remarks>
-             Sample request:
+             Ejemplo de solicitud:
             
                  PUT /api/Crop/5
                  {
-                    "cropType": "Wheat",
+                    "cropType": "Trigo",
                     "quantity": 150,
-                    "status": "Harvested"
+                    "status": "Cosechado"
                  }
             
              </remarks>
-             <param name="id">The ID of the crop to update</param>
-             <param name="command">The updated crop data</param>
-             <response code="200">Crop updated successfully</response>
-             <response code="400">If the crop has invalid properties</response>
-             <response code="404">If the crop is not found</response>
-             <response code="500">Unexpected error</response>
+             <param name="id">ID del cultivo a actualizar.</param>
+             <param name="command">Datos actualizados del cultivo.</param>
+             <response code="200">Cultivo actualizado correctamente.</response>
+             <response code="400">Si el cultivo tiene propiedades inválidas.</response>
+             <response code="404">Si el cultivo no se encuentra.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.DeleteAsync(System.Int32)">
             <summary>
-            Deletes a crop by its ID.
+            Elimina un cultivo por su ID.
             </summary>
-            <param name="id">The ID of the crop to delete</param>
-            <response code="200">Crop deleted successfully</response>
-            <response code="404">If the crop is not found</response>
-            <response code="500">Unexpected error</response>
+            <param name="id">ID del cultivo a eliminar.</param>
+            <response code="200">Cultivo eliminado correctamente.</response>
+            <response code="404">Si el cultivo no se encuentra.</response>
+            <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.GetRecommendationByIdAsync(System.Int32)">
-            <summary>Obtain a recommendation by its ID</summary>
-            <param name="id">Recommendation ID</param>
-            <response code="200">Returns the recommendation</response>
-            <response code="404">If the recomendation is not found</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene una recomendación por su ID.</summary>
+            <param name="id">ID de la recomendación.</param>
+            <response code="200">Devuelve la recomendación.</response>
+            <response code="404">Si la recomendación no se encuentra.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.GetRecommendationsByCropIdAsync(System.Int32)">
-            <summary>Obtain the active recommendations for a specific crop</summary>
-            <param name="cropId">Crop ID</param>
-            <response code="200">Returns the recommendation for the crop</response>
-            <response code="404">If no recommendation is found for the crop</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene las recomendaciones activas para un cultivo específico.</summary>
+            <param name="cropId">ID del cultivo.</param>
+            <response code="200">Devuelve las recomendaciones del cultivo.</response>
+            <response code="404">Si no se encuentra ninguna recomendación para el cultivo.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.CreateRecommendationAsync(System.Int32,Presentation.Request.CreateRecommendationCommand)">
              <summary>
@@ -111,13 +111,13 @@
                  }
             
              </remarks>
-             <param name="cropId">ID del cultivo asociado</param>
-             <param name="command">Datos de la recomendación a crear</param>
-             <returns>ID de la recomendación recién creada</returns>
-             <response code="201">Devuelve el ID de la recomendación creada</response>
-             <response code="400">Si la recomendación tiene propiedades inválidas</response>
-             <response code="404">Si no se encuentra el cultivo especificado</response>
-             <response code="500">Si ocurre un error inesperado</response>
+             <param name="cropId">ID del cultivo asociado.</param>
+             <param name="command">Datos de la recomendación a crear.</param>
+             <returns>ID de la recomendación recién creada.</returns>
+             <response code="201">Devuelve el ID de la recomendación creada.</response>
+             <response code="400">Si la recomendación tiene propiedades inválidas.</response>
+             <response code="404">Si no se encuentra el cultivo especificado.</response>
+             <response code="500">Si ocurre un error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.UpdateRecommendationAsync(System.Int32,Presentation.Request.UpdateRecommendationCommand)">
              <summary>
@@ -133,51 +133,51 @@
                  }
             
              </remarks>
-             <param name="id">ID de la recomendación a actualizar</param>
-             <param name="command">Datos actualizados de la recomendación</param>
-             <response code="200">Recomendación actualizada correctamente</response>
-             <response code="400">Si la recomendación tiene propiedades inválidas</response>
-             <response code="404">Si la recomendación no se encuentra</response>
-             <response code="500">Error inesperado</response>
+             <param name="id">ID de la recomendación a actualizar.</param>
+             <param name="command">Datos actualizados de la recomendación.</param>
+             <response code="200">Recomendación actualizada correctamente.</response>
+             <response code="400">Si la recomendación tiene propiedades inválidas.</response>
+             <response code="404">Si la recomendación no se encuentra.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.CropController.DeleteRecommendationAsync(System.Int32)">
             <summary>
             Elimina una recomendación por su ID.
             </summary>
-            <param name="id">ID de la recomendación a eliminar</param>
-            <response code="200">Recomendación eliminada correctamente</response>
-            <response code="404">Si la recomendación no se encuentra</response>
-            <response code="500">Error inesperado</response>
+            <param name="id">ID de la recomendación a eliminar.</param>
+            <response code="200">Recomendación eliminada correctamente.</response>
+            <response code="404">Si la recomendación no se encuentra.</response>
+            <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.GetAsync">
-            <summary>Obtiene todos los campos activos</summary>
+            <summary>Obtiene todos los campos activos.</summary>
             <remarks>
             GET /api/Field
             </remarks>
-            <response code="200">Devuelve todos los campos</response>
-            <response code="404">Si no hay campos</response>
-            <response code="500">Si ocurre un error interno</response>
+            <response code="200">Devuelve todos los campos.</response>
+            <response code="404">Si no hay campos.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.GetAsync(System.Int32)">
-            <summary>Obtiene un campo por su ID</summary>
-            <param name="id">ID del campo</param>
-            <response code="200">Devuelve el campo</response>
-            <response code="404">Si el campo no se encuentra</response>
-            <response code="500">Si ocurre un error interno</response>
+            <summary>Obtiene un campo por su ID.</summary>
+            <param name="id">ID del campo.</param>
+            <response code="200">Devuelve el campo.</response>
+            <response code="404">Si el campo no se encuentra.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.GetFieldByNameAsync(System.String)">
-            <summary>Obtiene un campo por su Nombre</summary>
-            <param name="name">Nombre del campo</param>
-            <response code="200">Devuelve el campo</response>
-            <response code="404">Si el campo no se encuentra</response>
-            <response code="500">Si ocurre un error interno</response>
+            <summary>Obtiene un campo por su nombre.</summary>
+            <param name="name">Nombre del campo.</param>
+            <response code="200">Devuelve el campo.</response>
+            <response code="404">Si el campo no se encuentra.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.GetByUserIdAsync(System.Int32)">
-            <summary>Obtiene los campos del usuario activo</summary>
-            <param name="userId">ID del usuario</param>
-            <response code="200">Devuelve el campo del usuario</response>
-            <response code="404">Si no se encuentra un campo para el usuario</response>
-            <response code="500">Si ocurre un error interno</response>
+            <summary>Obtiene los campos de un usuario específico.</summary>
+            <param name="userId">ID del usuario.</param>
+            <response code="200">Devuelve los campos del usuario.</response>
+            <response code="404">Si no se encuentra ningún campo para el usuario.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.PostAsync(Presentation.Request.CreateFieldCommand)">
              <summary>
@@ -195,11 +195,12 @@
                  }
             
              </remarks>
-             <param name="command">El campo a crear</param>
-             <returns>El ID del campo recién creado</returns>
-             <response code="201">Devuelve el ID del campo creado</response>
-             <response code="400">Si el campo tiene propiedades inválidas</response>
-             <response code="500">Si ocurre un error inesperado</response>
+             <param name="command">Datos del campo a crear.</param>
+             <returns>ID del campo recién creado.</returns>
+             <response code="201">Devuelve el ID del campo creado.</response>
+             <response code="400">Si el campo tiene propiedades inválidas.</response>
+             <response code="409">Si ya existe un campo con el mismo nombre.</response>
+             <response code="500">Si ocurre un error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.PutAsync(System.Int32,Presentation.Request.UpdateFieldCommand)">
              <summary>
@@ -217,44 +218,44 @@
                  }
             
              </remarks>
-             <param name="id">El ID del campo a actualizar</param>
-             <param name="command">Los datos actualizados del campo</param>
-             <response code="200">Campo actualizado exitosamente</response>
-             <response code="400">Si el campo tiene propiedades inválidas</response>
-             <response code="404">Si el campo no se encuentra</response>
-             <response code="500">Si ocurre un error inesperado</response>
+             <param name="id">ID del campo a actualizar.</param>
+             <param name="command">Datos actualizados del campo.</param>
+             <response code="200">Campo actualizado correctamente.</response>
+             <response code="400">Si el campo tiene propiedades inválidas.</response>
+             <response code="404">Si el campo no se encuentra.</response>
+             <response code="500">Si ocurre un error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.FieldController.DeleteAsync(System.Int32)">
             <summary>
             Elimina un campo por su ID.
             </summary>
-            <param name="id">El ID del campo a eliminar</param>
-            <response code="200">Campo eliminado exitosamente</response>
-            <response code="404">Si el campo no se encuentra</response>
-            <response code="500">Si ocurre un error inesperado</response>
+            <param name="id">ID del campo a eliminar.</param>
+            <response code="200">Campo eliminado correctamente.</response>
+            <response code="404">Si el campo no se encuentra.</response>
+            <response code="500">Si ocurre un error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.GetAsync">
-            <summary>Obtain all the active subscriptions</summary>
+            <summary>Obtiene todas las suscripciones activas.</summary>
             <remarks>
             GET /api/Subscription
             </remarks>
-            <response code="200">Returns all the subscriptions</response>
-            <response code="404">If there are no subscriptions</response>
-            <response code="500">If there is an internal server error</response>
+            <response code="200">Devuelve todas las suscripciones.</response>
+            <response code="404">Si no hay suscripciones.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.GetAsync(System.Int32)">
-            <summary>Obtain a subscription by its ID</summary>
-            <param name="id">Subscription ID</param>
-            <response code="200">Returns the subscription</response>
-            <response code="404">If the subscription is not found</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene una suscripción por su ID.</summary>
+            <param name="id">ID de la suscripción.</param>
+            <response code="200">Devuelve la suscripción.</response>
+            <response code="404">Si la suscripción no se encuentra.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.GetByUserIdAsync(System.Int32)">
-            <summary>Obtain the active subscription for a specific user</summary>
-            <param name="userId">User ID</param>
-            <response code="200">Returns the subscription for the user</response>
-            <response code="404">If no subscription is found for the user</response>
-            <response code="500">If there is an internal server error</response>
+            <summary>Obtiene la suscripción activa de un usuario específico.</summary>
+            <param name="userId">ID del usuario.</param>
+            <response code="200">Devuelve la suscripción del usuario.</response>
+            <response code="404">Si no se encuentra una suscripción para el usuario.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.PostAsync(Presentation.Request.CreateSubscriptionCommand)">
              <summary>
@@ -262,113 +263,112 @@
              </summary>
              <remarks>
              Valores para `planType`:
-             - 0: Basic
-             - 1: Standard
+             - 0: Básico
+             - 1: Estándar
              - 2: Premium
             
              Ejemplo de solicitud:
             
                  POST /api/Subscription
                  {
-                    "planType": "Basic",
+                    "planType": "Básico",
                     "startDate": "2024-06-01T00:00:00",
                     "endDate": "2024-12-01T00:00:00"
                  }
              </remarks>
-             <param name="command">La suscripción a crear</param>
-             <returns>El ID de la suscripción recién creada</returns>
-             <response code="201">Devuelve el ID de la suscripción creada</response>
-             <response code="400">Si la suscripción tiene propiedades inválidas</response>
-             <response code="409">Error al validar los datos</response>
-             <response code="500">Error inesperado</response>
+             <param name="command">Datos de la suscripción a crear.</param>
+             <returns>ID de la suscripción recién creada.</returns>
+             <response code="201">Devuelve el ID de la suscripción creada.</response>
+             <response code="400">Si la suscripción tiene propiedades inválidas.</response>
+             <response code="409">Error al validar los datos.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.PutAsync(System.Int32,Presentation.Request.UpdateSubscriptionCommand)">
              <summary>
-             Updates an existing Subscription by its ID.
+             Actualiza una suscripción existente por su ID.
              </summary>
              <remarks>
-             Sample request:
+             Ejemplo de solicitud:
             
                  PUT /api/Subscription/5
                  {
-                    "planType": "Standard",
+                    "planType": "Estándar",
                     "startDate": "2024-07-01T00:00:00",
                     "endDate": "2024-12-31T00:00:00"
                  }
-            
              </remarks>
-             <param name="id">The ID of the subscription to update</param>
-             <param name="command">The updated subscription data</param>
-             <response code="200">Subscription updated successfully</response>
-             <response code="400">If the subscription has invalid properties</response>
-             <response code="404">If the subscription is not found</response>
-             <response code="500">Unexpected error</response>
+             <param name="id">ID de la suscripción a actualizar.</param>
+             <param name="command">Datos actualizados de la suscripción.</param>
+             <response code="200">Suscripción actualizada correctamente.</response>
+             <response code="400">Si la suscripción tiene propiedades inválidas.</response>
+             <response code="404">Si la suscripción no se encuentra.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:Presentation.Controllers.SubscriptionController.DeleteAsync(System.Int32)">
             <summary>
-            Deletes a subscription by its ID.
+            Elimina una suscripción por su ID.
             </summary>
-            <param name="id">The ID of the subscription to delete</param>
-            <response code="200">Subscription deleted successfully</response>
-            <response code="404">If the subscription is not found</response>
-            <response code="500">Unexpected error</response>
+            <param name="id">ID de la suscripción a eliminar.</param>
+            <response code="200">Suscripción eliminada correctamente.</response>
+            <response code="404">Si la suscripción no se encuentra.</response>
+            <response code="500">Error inesperado.</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.GetAsync">
-            <summary>Obtain all the active User</summary>
-             <remarks>
-             GET /api/User
-               </remarks>
-             <response code="200">Returns all the User</response>
-             <response code="404">If there are no User</response>
-             <response code="500">If there is an internal server error</response>
+            <summary>Obtiene todos los usuarios activos.</summary>
+            <remarks>
+            GET /api/v1/User/getall
+            </remarks>
+            <response code="200">Devuelve todos los usuarios.</response>
+            <response code="404">Si no hay usuarios.</response>
+            <response code="500">Si ocurre un error interno del servidor.</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.RegisterAsync(NutriControl.Domain.IAM.Models.Comands.SingupCommand)">
              <summary>
-             Singup a new User.
+             Registra un nuevo usuario.
              </summary>
              <remarks>
-             Sample request:
+             Ejemplo de solicitud:
             
-                 POST /api/Account
+                 POST /api/v1/User/register
                  {
-                 "username": "Jorge Ruiz",
-                 "dni": "28089824",
-                 "ruc": "35355800618",
-                 "emailAddress": "user@example.com",
-                 "phone": "809324921", 
-                 "role": "Farmer - Admin",
-                 "password": "Securepassword123!",
-                 "confirmPassword": "Securepassword123!"
+                     "username": "Jorge Ruiz",
+                     "dni": "28089824",
+                     "ruc": "35355800618",
+                     "emailAddress": "user@example.com",
+                     "phone": "809324921",
+                     "role": "Farmer - Admin",
+                     "password": "Securepassword123!",
+                     "confirmPassword": "Securepassword123!"
                  }
             
              </remarks>
-             <param name="SinginCommad">The User to create</param>
-             <returns>A newly created User</returns>
-             <response code="201">Returns the newly created User</response>
-             <response code="400">If the User has invalid property</response>
-             <response code="409">Error validating data</response>
-             <response code="500">Unexpected error</response>
+             <param name="command">Datos del usuario a crear.</param>
+             <returns>ID del usuario recién creado.</returns>
+             <response code="201">Devuelve el ID del usuario creado.</response>
+             <response code="400">Si el usuario tiene propiedades inválidas.</response>
+             <response code="409">Error validando los datos.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.LoginAsync(NutriControl.Domain.IAM.Models.Comands.SigninCommand)">
              <summary>
-             Login a new User.
+             Inicia sesión de usuario.
              </summary>
              <remarks>
-             Sample request:
+             Ejemplo de solicitud:
             
-                 POST /api/Account
+                 POST /api/v1/User/login
                  {
-                 "username": "Jorge Ruiz",
-                 "password": "Securepassword123!",
+                     "username": "Jorge Ruiz",
+                     "password": "Securepassword123!"
                  }
             
              </remarks>
-             <param name="SinginCommad">The User to create</param>
-             <returns>A newly created User</returns>
-             <response code="201">Returns the newly created User</response>
-             <response code="400">If the User has invalid property</response>
-             <response code="409">Error validating data</response>
-             <response code="500">Unexpected error</response>
+             <param name="command">Credenciales del usuario.</param>
+             <returns>Token JWT generado.</returns>
+             <response code="201">Devuelve el token JWT.</response>
+             <response code="400">Si las credenciales son inválidas.</response>
+             <response code="409">Error validando los datos.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.PutAsync(System.Int32,NutriControl.Domain.IAM.Models.Comands.UpdateUserCommand)">
              <summary>
@@ -379,29 +379,31 @@
             
                  PUT /api/v1/User/5
                  {
-                    "username": "Usuario Actualizado",
-                    "DniOrRuc": "12345678",
-                    "emailAddress": "nuevoemail@example.com",
-                    "phone": "809123456",
-                  
+                     "username": "Usuario Actualizado",
+                     "DniOrRuc": "12345678",
+                     "emailAddress": "nuevoemail@example.com",
+                     "phone": "809123456"
                  }
             
              </remarks>
-             <param name="id">El ID del usuario a actualizar</param>
-             <param name="command">Los datos actualizados del usuario</param>
-             <response code="200">Usuario actualizado exitosamente</response>
-             <response code="400">Si el usuario tiene propiedades inválidas</response>
-             <response code="404">Si el usuario no se encuentra</response>
-             <response code="500">Si ocurre un error inesperado</response>
+             <param name="id">ID del usuario a actualizar.</param>
+             <param name="command">Datos actualizados del usuario.</param>
+             <response code="200">Usuario actualizado correctamente.</response>
+             <response code="400">Si el usuario tiene propiedades inválidas.</response>
+             <response code="404">Si el usuario no se encuentra.</response>
+             <response code="500">Error inesperado.</response>
         </member>
         <member name="M:NutriControl.Presentation.IAM.Controllers.UserController.DeleteAsync(System.Int32)">
-            <summary>Obtain all the active User</summary>
-             <remarks>
-             DELETE: api/User/5
-               </remarks>
-             <response code="200">Returns delete the User</response>
-             <response code="404">If there are no User</response>
-             <response code="500">If there is an internal server error</response>
+            <summary>
+            Elimina un usuario por su ID.
+            </summary>
+            <remarks>
+            DELETE /api/v1/User/{id}
+            </remarks>
+            <param name="id">ID del usuario a eliminar.</param>
+            <response code="200">Usuario eliminado correctamente.</response>
+            <response code="404">Si el usuario no se encuentra.</response>
+            <response code="500">Error inesperado.</response>
         </member>
     </members>
 </doc>

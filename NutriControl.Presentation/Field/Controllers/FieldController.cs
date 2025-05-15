@@ -26,13 +26,13 @@ public class FieldController : ControllerBase
     }
 
     // GET: api/Field
-    /// <summary>Obtiene todos los campos activos</summary>
+    /// <summary>Obtiene todos los campos activos.</summary>
     /// <remarks>
     /// GET /api/Field
     /// </remarks>
-    /// <response code="200">Devuelve todos los campos</response>
-    /// <response code="404">Si no hay campos</response>
-    /// <response code="500">Si ocurre un error interno</response>
+    /// <response code="200">Devuelve todos los campos.</response>
+    /// <response code="404">Si no hay campos.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet]
     [ProducesResponseType(typeof(List<FieldResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -49,11 +49,11 @@ public class FieldController : ControllerBase
     }
 
     // GET: api/Field/id
-    /// <summary>Obtiene un campo por su ID</summary>
-    /// <param name="id">ID del campo</param>
-    /// <response code="200">Devuelve el campo</response>
-    /// <response code="404">Si el campo no se encuentra</response>
-    /// <response code="500">Si ocurre un error interno</response>
+    /// <summary>Obtiene un campo por su ID.</summary>
+    /// <param name="id">ID del campo.</param>
+    /// <response code="200">Devuelve el campo.</response>
+    /// <response code="404">Si el campo no se encuentra.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("{id}", Name = "GetFieldById")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(FieldResponse), StatusCodes.Status200OK)]
@@ -76,14 +76,13 @@ public class FieldController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    
-    
-    // GET: api/Field/name
-    /// <summary>Obtiene un campo por su Nombre</summary>
-    /// <param name="name">Nombre del campo</param>
-    /// <response code="200">Devuelve el campo</response>
-    /// <response code="404">Si el campo no se encuentra</response>
-    /// <response code="500">Si ocurre un error interno</response>
+
+    // GET: api/Field/name/{name}
+    /// <summary>Obtiene un campo por su nombre.</summary>
+    /// <param name="name">Nombre del campo.</param>
+    /// <response code="200">Devuelve el campo.</response>
+    /// <response code="404">Si el campo no se encuentra.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("name/{name}", Name = "GetFieldByName")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(FieldResponse), StatusCodes.Status200OK)]
@@ -106,16 +105,13 @@ public class FieldController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    
-    
-    
 
-    // GET: api/Field/user/id
-    /// <summary>Obtiene los campos del usuario activo</summary>
-    /// <param name="userId">ID del usuario</param>
-    /// <response code="200">Devuelve el campo del usuario</response>
-    /// <response code="404">Si no se encuentra un campo para el usuario</response>
-    /// <response code="500">Si ocurre un error interno</response>
+    // GET: api/Field/user/{userId}
+    /// <summary>Obtiene los campos de un usuario específico.</summary>
+    /// <param name="userId">ID del usuario.</param>
+    /// <response code="200">Devuelve los campos del usuario.</response>
+    /// <response code="404">Si no se encuentra ningún campo para el usuario.</response>
+    /// <response code="500">Si ocurre un error interno del servidor.</response>
     [HttpGet("user/{userId}", Name = "GetFieldsByUserId")]
     [CustomAuthorize("Farmer")]
     [ProducesResponseType(typeof(FieldResponse), StatusCodes.Status200OK)]
@@ -138,12 +134,6 @@ public class FieldController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
-    
-    
-    
-    
-    
-    
 
     // POST: api/Field
     /// <summary>
@@ -161,11 +151,12 @@ public class FieldController : ControllerBase
     ///     }
     ///
     /// </remarks>
-    /// <param name="command">El campo a crear</param>
-    /// <returns>El ID del campo recién creado</returns>
-    /// <response code="201">Devuelve el ID del campo creado</response>
-    /// <response code="400">Si el campo tiene propiedades inválidas</response>
-    /// <response code="500">Si ocurre un error inesperado</response>
+    /// <param name="command">Datos del campo a crear.</param>
+    /// <returns>ID del campo recién creado.</returns>
+    /// <response code="201">Devuelve el ID del campo creado.</response>
+    /// <response code="400">Si el campo tiene propiedades inválidas.</response>
+    /// <response code="409">Si ya existe un campo con el mismo nombre.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
     [HttpPost]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PostAsync([FromBody] CreateFieldCommand command)
@@ -173,12 +164,10 @@ public class FieldController : ControllerBase
         var user = HttpContext.Items["User"] as User;
         if (user == null) return Unauthorized();
 
-        // Asignar el UserId al comando
         command.UserId = user.Id;
 
         if (!ModelState.IsValid) return BadRequest();
 
-        // Verificar si ya existe un campo con el mismo nombre
         var existingField = await _fieldQueryService.FindFieldByNameAsync(command.Name);
         if (existingField != null)
         {
@@ -190,7 +179,7 @@ public class FieldController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
-    // PUT: api/Field/id
+    // PUT: api/Field/{id}
     /// <summary>
     /// Actualiza un campo existente por su ID.
     /// </summary>
@@ -206,12 +195,12 @@ public class FieldController : ControllerBase
     ///     }
     ///
     /// </remarks>
-    /// <param name="id">El ID del campo a actualizar</param>
-    /// <param name="command">Los datos actualizados del campo</param>
-    /// <response code="200">Campo actualizado exitosamente</response>
-    /// <response code="400">Si el campo tiene propiedades inválidas</response>
-    /// <response code="404">Si el campo no se encuentra</response>
-    /// <response code="500">Si ocurre un error inesperado</response>
+    /// <param name="id">ID del campo a actualizar.</param>
+    /// <param name="command">Datos actualizados del campo.</param>
+    /// <response code="200">Campo actualizado correctamente.</response>
+    /// <response code="400">Si el campo tiene propiedades inválidas.</response>
+    /// <response code="404">Si el campo no se encuentra.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
     [HttpPut("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateFieldCommand command)
@@ -226,14 +215,14 @@ public class FieldController : ControllerBase
         return Ok();
     }
 
-    // DELETE: api/Field/id
+    // DELETE: api/Field/{id}
     /// <summary>
     /// Elimina un campo por su ID.
     /// </summary>
-    /// <param name="id">El ID del campo a eliminar</param>
-    /// <response code="200">Campo eliminado exitosamente</response>
-    /// <response code="404">Si el campo no se encuentra</response>
-    /// <response code="500">Si ocurre un error inesperado</response>
+    /// <param name="id">ID del campo a eliminar.</param>
+    /// <response code="200">Campo eliminado correctamente.</response>
+    /// <response code="404">Si el campo no se encuentra.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
     [HttpDelete("{id}")]
     [CustomAuthorize("Farmer")]
     public async Task<IActionResult> DeleteAsync(int id)

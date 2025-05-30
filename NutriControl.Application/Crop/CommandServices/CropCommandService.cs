@@ -73,7 +73,7 @@ public class CropCommandService : ICropCommandService
         var existingRecommendation = await _cropRepository.GetRecommendationByIdAsync(command.Id);
         var recommendation = _mapper.Map<UpdateRecommendationCommand, Recommendation>(command);
 
-        if (existingRecommendation == null) throw new NotException("Crop not found");
+        if (existingRecommendation == null) throw new NotException("Recommendation not found");
 
         return await _cropRepository.UpdateRecommendationAsync(recommendation, recommendation.Id);
     }
@@ -81,8 +81,43 @@ public class CropCommandService : ICropCommandService
     public async Task<bool> Handle(DeleteRecommendationCommand command)
     {
         var existingRecommendation = await _cropRepository.GetRecommendationByIdAsync(command.Id);
-        if (existingRecommendation == null) throw new NotException("Crop not found");
+        if (existingRecommendation == null) throw new NotException("Recommendation not found");
         return await _cropRepository.DeleteRecommendationAsync(command.Id);
     }
+    
+    
+    public async Task<int> Handle(CreateHistoryCommand command)
+    {
+        var history = _mapper.Map<CreateHistoryCommand, History>(command);
+
+        
+        var existingHistory = await _cropRepository.GetHistoryByIdAsync(history.Id);
+        if (existingHistory != null)
+            throw new DuplicateNameException("La historia ya existe.");
+
+        
+        return await _cropRepository.SaveHistoryAsync(history);
+    }
+    
+    
+    public async Task<bool> Handle(UpdateHistoryCommand command)
+    {
+        var existingHistory = await _cropRepository.GetHistoryByIdAsync(command.Id);
+        var history = _mapper.Map<UpdateHistoryCommand, History>(command);
+
+        if (existingHistory == null) throw new NotException("History not found");
+
+        return await _cropRepository.UpdateHistoryAsync(history, history.Id);
+    }
+    
+    public async Task<bool> Handle(DeleteHistoryCommand command)
+    {
+        var existingHistory = await _cropRepository.GetHistoryByIdAsync(command.Id);
+        if (existingHistory == null) throw new NotException("HISTORY not found");
+        return await _cropRepository.DeleteHistoryAsync(command.Id);
+    }
+    
+    
+    
     
 }

@@ -14,4 +14,9 @@ public interface ICropCommandService
     Task<bool> Handle(UpdateRecommendationCommand command);
     Task<bool> Handle(DeleteRecommendationCommand command);
     
+    Task<int> Handle(CreateHistoryCommand command);
+    Task<bool> Handle(UpdateHistoryCommand command);
+    Task<bool> Handle(DeleteHistoryCommand command);
+    
+    
 }

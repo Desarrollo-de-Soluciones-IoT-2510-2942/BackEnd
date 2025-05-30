@@ -24,5 +24,7 @@ public class RequestToModels : Profile
         CreateMap<UpdateCropCommand, Crop>();
         CreateMap<CreateRecommendationCommand, Recommendation>();
         CreateMap<UpdateRecommendationCommand, Recommendation>();
+        CreateMap<CreateHistoryCommand, History>();
+        CreateMap<UpdateHistoryCommand, History>();
     }
 }

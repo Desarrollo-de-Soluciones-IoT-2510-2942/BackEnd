@@ -149,6 +149,65 @@
             <response code="404">Si la recomendación no se encuentra.</response>
             <response code="500">Error inesperado.</response>
         </member>
+        <member name="M:Presentation.Controllers.CropController.CreateHistoryAsync(System.Int32,Presentation.Request.CreateHistoryCommand)">
+             <summary>
+             Crea un nuevo historial de ahorro para un cultivo específico.
+             </summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 POST /api/Crop/5/history
+                 {
+                    "startDate": "2024-06-01T00:00:00",
+                    "endDate": "2024-06-30T00:00:00",
+                    "savingsType": "Agua",
+                    "amountSaved": 100,
+                    "unitOfMeasurement": "Litros",
+                    "percentageSaved": 15.5
+                 }
+            
+             </remarks>
+             <param name="cropId">ID del cultivo asociado.</param>
+             <param name="command">Datos del historial a crear.</param>
+             <returns>ID del historial recién creado.</returns>
+             <response code="201">Devuelve el ID del historial creado.</response>
+             <response code="400">Si el historial tiene propiedades inválidas.</response>
+             <response code="404">Si no se encuentra el cultivo especificado.</response>
+             <response code="500">Si ocurre un error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.CropController.UpdateHistoryAsync(System.Int32,Presentation.Request.UpdateHistoryCommand)">
+             <summary>
+             Actualiza un historial de ahorro existente por su ID.
+             </summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 {
+                    "startDate": "2024-06-01T00:00:00",
+                    "endDate": "2024-06-30T00:00:00",
+                    "savingsType": "Agua",
+                    "amountSaved": 120,
+                    "unitOfMeasurement": "Litros",
+                    "percentageSaved": 18.0
+                 }
+            
+             </remarks>
+             <param name="id">ID del historial a actualizar.</param>
+             <param name="command">Datos actualizados del historial.</param>
+             <response code="200">Historial actualizado correctamente.</response>
+             <response code="400">Si el historial tiene propiedades inválidas.</response>
+             <response code="404">Si el historial no se encuentra.</response>
+             <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.CropController.DeleteHistoryAsync(System.Int32)">
+            <summary>
+            Elimina un historial de ahorro por su ID.
+            </summary>
+            <param name="id">ID del historial a eliminar.</param>
+            <response code="200">Historial eliminado correctamente.</response>
+            <response code="404">Si el historial no se encuentra.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
         <member name="M:Presentation.Controllers.FieldController.GetAsync">
             <summary>Obtiene todos los campos activos.</summary>
             <remarks>

@@ -12,4 +12,8 @@ public interface ICropQueryService
     Task<Recommendation?> Handle(GetRecommendationByIdQuery query);
     
     Task<List<RecommendationResponse>?> Handle(GetAllRecomendationsForCropQuery query);
+    
+    Task<History?> Handle(GetHistoryByIdQuery query);
+    
+    Task<List<HistoryResponse>?> Handle(GetAllHistoriesForCropQueryQuery forCropQueryQuery);
 }

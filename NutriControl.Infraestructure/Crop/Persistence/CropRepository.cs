@@ -30,6 +30,12 @@ public class CropRepository : ICropRepository
         return await _context.Recommendations.SingleOrDefaultAsync(s => s.Id == id && s.IsActive);
     }
     
+    public async Task<History> GetHistoryByIdAsync(int id)
+    {
+        return await _context.Histories.SingleOrDefaultAsync(s => s.Id == id && s.IsActive);
+    }
+    
+    
     public async Task<List<global::Domain.Crop>> GetCropsByFieldIdAsync(int fieldId)
     {
         return await _context.Crops.Where(s => s.FieldId == fieldId && s.IsActive).ToListAsync();
@@ -40,6 +46,11 @@ public class CropRepository : ICropRepository
         return await _context.Recommendations.Where(s => s.CropId == cropId && s.IsActive).ToListAsync();
     }
 
+    public async Task<List<History>> GetHistoriesByCropIdAsync(int cropId)
+    {
+        return await _context.Histories.Where(s => s.CropId == cropId && s.IsActive).ToListAsync();
+    }
+    
     public async Task<int> SaveCropAsync(global::Domain.Crop dataCrop)
     {
         using (var transaction = await _context.Database.BeginTransactionAsync())
@@ -80,6 +91,27 @@ public class CropRepository : ICropRepository
         return dataRecommendation.Id;
     }
     
+    
+    public async Task<int> SaveHistoryAsync(History dataHistory)
+    {
+        using (var transaction = await _context.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                dataHistory.IsActive = true;
+                _context.Histories.Add(dataHistory);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new Exception(ex.Message);
+            }
+        }
+        return dataHistory.Id;
+    }
+    
     public async Task<bool> UpdateCropAsync(global::Domain.Crop dataCrop, int id)
     {
         var existing = await _context.Crops.FirstOrDefaultAsync(s => s.Id == id);
@@ -110,6 +142,27 @@ public class CropRepository : ICropRepository
         return true;
     }
 
+    public async Task<bool> UpdateHistoryAsync(History dataHistory, int id)
+    {
+        var existing = await _context.Histories.FirstOrDefaultAsync(s => s.Id == id);
+        if (existing == null) return false;
+        
+        existing.StartDate = dataHistory.StartDate;
+        existing.EndDate = dataHistory.EndDate;
+        existing.SavingsType = dataHistory.SavingsType;
+        existing.AmountSaved = dataHistory.AmountSaved;
+        existing.UnitOfMeasurement = dataHistory.UnitOfMeasurement;
+        existing.PercentageSaved = dataHistory.PercentageSaved;
+        existing.IsActive = dataHistory.IsActive;
+
+        _context.Histories.Update(existing);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    
+    
+    
+    
     public async Task<bool> DeleteCropAsync(int id)
     {
         var existing = await _context.Crops.FirstOrDefaultAsync(s => s.Id == id);
@@ -128,6 +181,17 @@ public class CropRepository : ICropRepository
 
         existing.IsActive = false;
         _context.Recommendations.Update(existing);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+    
+    public async Task<bool> DeleteHistoryAsync(int id)
+    {
+        var existing = await _context.Histories.FirstOrDefaultAsync(s => s.Id == id);
+        if (existing == null) return false;
+
+        existing.IsActive = false;
+        _context.Histories.Update(existing);
         await _context.SaveChangesAsync();
         return true;
     }

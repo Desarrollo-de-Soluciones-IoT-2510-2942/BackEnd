@@ -24,6 +24,8 @@ public class ModelsToRequest : Profile
         CreateMap<User, UpdateUserCommand>();
         CreateMap<Recommendation, CreateRecommendationCommand>();
         CreateMap<Recommendation, UpdateRecommendationCommand>();
+        CreateMap<History, CreateHistoryCommand>();
+        CreateMap<History, UpdateHistoryCommand>();
 
     }
 }

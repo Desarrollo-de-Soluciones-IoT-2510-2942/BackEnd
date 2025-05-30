@@ -186,5 +186,9 @@ namespace NutriControl.Presentation.IAM.Controllers
             var result = await _userCommandService.Handle(command);
             return Ok();
         }
+        
+        
+        
+        
     }
 }

@@ -353,4 +353,96 @@ public class CropController : ControllerBase
 
         return Ok();
     }
+    
+    // POST: api/Crop/{cropId}/history
+    /// <summary>
+    /// Crea un nuevo historial de ahorro para un cultivo específico.
+    /// </summary>
+    /// <remarks>
+    /// Ejemplo de solicitud:
+    ///
+    ///     POST /api/Crop/5/history
+    ///     {
+    ///        "startDate": "2024-06-01T00:00:00",
+    ///        "endDate": "2024-06-30T00:00:00",
+    ///        "savingsType": "Agua",
+    ///        "amountSaved": 100,
+    ///        "unitOfMeasurement": "Litros",
+    ///        "percentageSaved": 15.5
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="cropId">ID del cultivo asociado.</param>
+    /// <param name="command">Datos del historial a crear.</param>
+    /// <returns>ID del historial recién creado.</returns>
+    /// <response code="201">Devuelve el ID del historial creado.</response>
+    /// <response code="400">Si el historial tiene propiedades inválidas.</response>
+    /// <response code="404">Si no se encuentra el cultivo especificado.</response>
+    /// <response code="500">Si ocurre un error inesperado.</response>
+    [HttpPost("{cropId}/history")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> CreateHistoryAsync(int cropId, [FromBody] CreateHistoryCommand command)
+    {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        command.CropId = cropId;
+        var result = await _cropCommandService.Handle(command);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
+    
+    // PUT: api/Crop/history/{id}
+    /// <summary>
+    /// Actualiza un historial de ahorro existente por su ID.
+    /// </summary>
+    /// <remarks>
+    /// Ejemplo de solicitud:
+    ///
+    ///     {
+    ///        "startDate": "2024-06-01T00:00:00",
+    ///        "endDate": "2024-06-30T00:00:00",
+    ///        "savingsType": "Agua",
+    ///        "amountSaved": 120,
+    ///        "unitOfMeasurement": "Litros",
+    ///        "percentageSaved": 18.0
+    ///     }
+    ///
+    /// </remarks>
+    /// <param name="id">ID del historial a actualizar.</param>
+    /// <param name="command">Datos actualizados del historial.</param>
+    /// <response code="200">Historial actualizado correctamente.</response>
+    /// <response code="400">Si el historial tiene propiedades inválidas.</response>
+    /// <response code="404">Si el historial no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
+    [HttpPut("history/{id}")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> UpdateHistoryAsync(int id, [FromBody] UpdateHistoryCommand command)
+    {
+        command.Id = id;
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var result = await _cropCommandService.Handle(command);
+        if (!result) return NotFound();
+        return Ok();
+    }
+    
+    // DELETE: api/Crop/history/{id}
+    /// <summary>
+    /// Elimina un historial de ahorro por su ID.
+    /// </summary>
+    /// <param name="id">ID del historial a eliminar.</param>
+    /// <response code="200">Historial eliminado correctamente.</response>
+    /// <response code="404">Si el historial no se encuentra.</response>
+    /// <response code="500">Error inesperado.</response>
+    [HttpDelete("history/{id}")]
+    [CustomAuthorize("Farmer")]
+    public async Task<IActionResult> DeleteHistoryAsync(int id)
+    {
+        var command = new DeleteHistoryCommand { Id = id };
+        var result = await _cropCommandService.Handle(command);
+        if (!result) return NotFound();
+        return Ok();
+    }
+    
+    
+    
+    
+    
 }

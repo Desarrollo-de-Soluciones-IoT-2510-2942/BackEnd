@@ -29,6 +29,8 @@ public class NutriControlContext : DbContext
     public DbSet<Crop> Crops { get; set; }
     
     public DbSet<Recommendation> Recommendations { get; set; }
+    
+    public DbSet<History> Histories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -91,6 +93,16 @@ public class NutriControlContext : DbContext
         builder.Entity<Recommendation>().Property(r => r.IsActive).IsRequired().HasDefaultValue(true);
         
         
+        builder.Entity<History>().ToTable("History");
+        builder.Entity<History>().HasKey(h => h.Id);
+        builder.Entity<Recommendation>().Property(r => r.CropId).IsRequired();
+        builder.Entity<History>().Property(h => h.StartDate).IsRequired();
+        builder.Entity<History>().Property(h => h.EndDate).IsRequired();
+        builder.Entity<History>().Property(h => h.SavingsType).IsRequired().HasMaxLength(50);
+        builder.Entity<History>().Property(h => h.AmountSaved).IsRequired();
+        builder.Entity<History>().Property(h => h.UnitOfMeasurement).IsRequired().HasMaxLength(20);
+        builder.Entity<History>().Property(h => h.PercentageSaved).IsRequired().HasDefaultValue(0.0);
+        builder.Entity<History>().Property(h => h.IsActive).IsRequired().HasDefaultValue(true);
         
     }
 }

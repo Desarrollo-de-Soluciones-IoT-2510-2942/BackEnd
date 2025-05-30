@@ -51,4 +51,20 @@ public class CropQueryService: ICropQueryService
         return result;
     }
     
+    public async Task<History?> Handle(GetHistoryByIdQuery query)
+    {
+        var data = await _cropRepository.GetHistoryByIdAsync(query.Id);
+        return data;
+    }
+    
+    public async Task<List<HistoryResponse>?> Handle(GetAllHistoriesForCropQueryQuery forCropQueryQuery)
+    {
+        var data = await _cropRepository.GetHistoriesByCropIdAsync(forCropQueryQuery.cropId);
+        var result = _mapper.Map<List<History>, List<HistoryResponse>>(data);
+        return result;
+    }
+    
+    
+    
+    
 }

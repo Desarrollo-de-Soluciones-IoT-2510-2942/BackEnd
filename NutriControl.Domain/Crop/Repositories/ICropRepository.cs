@@ -23,4 +23,14 @@ public interface ICropRepository
     Task<List<Recommendation>> GetRecommendationsByCropIdAsync(int cropId);
     Task<Recommendation> GetRecommendationByIdAsync(int id);
     
+    
+    Task<int>  SaveHistoryAsync(History dataHistory);
+    Task<bool> UpdateHistoryAsync(History dataHistory, int id);
+    Task<bool> DeleteHistoryAsync(int id);
+    Task<List<History>> GetHistoriesByCropIdAsync(int cropId);
+    Task<History> GetHistoryByIdAsync(int id);
+    
+    
+    
+    
 }

@@ -17,6 +17,10 @@ public class ModelsToResponse : Profile
         CreateMap<Crop, CropResponse>();
         CreateMap<Recommendation, RecommendationResponse>();
         CreateMap<History, HistoryResponse>();
+        CreateMap<Device, DeviceResponse>();
+        CreateMap<Sensor, SensorResponse>();
+        CreateMap<SensorReading, SensorReadingResponse>();
+        CreateMap<Alert, AlertResponse>();
 
 
     }

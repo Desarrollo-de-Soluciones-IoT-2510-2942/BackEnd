@@ -26,6 +26,15 @@ public class ModelsToRequest : Profile
         CreateMap<Recommendation, UpdateRecommendationCommand>();
         CreateMap<History, CreateHistoryCommand>();
         CreateMap<History, UpdateHistoryCommand>();
+        CreateMap<Device, CreateDeviceCommand>();
+        CreateMap<Device, UpdateDeviceCommand>();
+        CreateMap<Sensor, CreateSensorCommand>();
+        CreateMap<Sensor, UpdateSensorCommand>();
+        CreateMap<SensorReading, CreateSensorReadingCommand>();
+        CreateMap<SensorReading, UpdateSensorReadingCommand>();
+        CreateMap<Alert, CreateAlertCommand>();
+        CreateMap<Alert, UpdateAlertCommand>();
+        
 
     }
 }

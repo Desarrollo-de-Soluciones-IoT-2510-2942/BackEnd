@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    // Aquí reemplaza la configuración de seguridad anterior por la nueva:
+
     
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -101,7 +101,9 @@ builder.Services.AddScoped<ICropRepository, CropRepository>();
 builder.Services.AddScoped<ICropCommandService, CropCommandService>();
 builder.Services.AddScoped<ICropQueryService, CropQueryService>();
 
-
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<IDeviceCommandService, DeviceCommandService>();
+builder.Services.AddScoped<IDeviceQueryService, DeviceQueryService>();
 
 
 

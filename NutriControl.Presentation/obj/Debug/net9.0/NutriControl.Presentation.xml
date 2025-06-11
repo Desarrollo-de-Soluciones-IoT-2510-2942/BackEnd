@@ -208,6 +208,239 @@
             <response code="404">Si el historial no se encuentra.</response>
             <response code="500">Error inesperado.</response>
         </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAllDevicesAsync">
+            <summary>Obtiene todos los dispositivos.</summary>
+            <response code="200">Devuelve la lista de dispositivos.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetDeviceByIdAsync(System.Int32)">
+            <summary>Obtiene un dispositivo por su ID.</summary>
+            <param name="id">ID del dispositivo.</param>
+            <response code="200">Devuelve el dispositivo.</response>
+            <response code="404">No se encuentra el dispositivo.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.CreateDeviceAsync(Presentation.Request.CreateDeviceCommand)">
+             <summary>Crea un nuevo dispositivo.</summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 POST /api/Device
+                 {
+                    "cropId": 5,
+                    "name": "Dispositivo 1"
+                 }
+            
+             - cropId: ID del cultivo al que se asocia el dispositivo.
+             - name: Nombre del dispositivo (entre 2 y 100 caracteres).
+             </remarks>
+             <param name="command">Datos del dispositivo a crear.</param>
+             <response code="201">Devuelve el ID del dispositivo creado.</response>
+             <response code="400">Propiedades inválidas.</response>
+             <response code="409">Dispositivo duplicado.</response>
+             <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.UpdateDeviceAsync(System.Int32,Presentation.Request.UpdateDeviceCommand)">
+            <summary>Actualiza un dispositivo existente.</summary>
+            <param name="id">ID del dispositivo.</param>
+            <param name="command">Datos actualizados.</param>
+            <response code="200">Actualizado correctamente.</response>
+            <response code="400">Propiedades inválidas.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.DeleteDeviceAsync(System.Int32)">
+            <summary>Elimina un dispositivo por su ID.</summary>
+            <param name="id">ID del dispositivo.</param>
+            <response code="200">Eliminado correctamente.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetDeviceByCropIdAsync(System.Int32)">
+            <summary>Obtiene un dispositivo por el ID del cultivo.</summary>
+            <param name="cropId">ID del cultivo.</param>
+            <response code="200">Devuelve el dispositivo.</response>
+            <response code="404">No se encuentra el dispositivo.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAllSensorsAsync">
+            <summary>Obtiene todos los sensores.</summary>
+            <response code="200">Devuelve la lista de sensores.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetSensorByIdAsync(System.Int32)">
+            <summary>Obtiene un sensor por su ID.</summary>
+            <param name="id">ID del sensor.</param>
+            <response code="200">Devuelve el sensor.</response>
+            <response code="404">No se encuentra el sensor.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetSensorsByDeviceIdAsync(System.Int32)">
+            <summary>Obtiene todos los sensores de un dispositivo.</summary>
+            <param name="deviceId">ID del dispositivo.</param>
+            <response code="200">Devuelve la lista de sensores.</response>
+            <response code="404">No se encuentran sensores.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.CreateSensorAsync(Presentation.Request.CreateSensorCommand)">
+             <summary>Crea un nuevo sensor.</summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 POST /api/Device/sensors
+                 {
+                    "deviceId": 1,
+                    "type": 0, 
+                    "unitOfMeasurement": "Celsius",
+                    "status": "Activo"
+                 }
+            
+             Valores posibles para "type":
+               0 = Temperature
+               1 = Humidity
+               2 = Light
+               3 = Rain
+               4 = pH
+               5 = Nutrients
+             </remarks>
+             <param name="command">Datos del sensor a crear.</param>
+             <response code="201">Devuelve el ID del sensor creado.</response>
+             <response code="400">Propiedades inválidas.</response>
+             <response code="409">Sensor duplicado.</response>
+             <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.UpdateSensorAsync(System.Int32,Presentation.Request.UpdateSensorCommand)">
+            <summary>Actualiza un sensor existente.</summary>
+            <param name="id">ID del sensor.</param>
+            <param name="command">Datos actualizados.</param>
+            <response code="200">Actualizado correctamente.</response>
+            <response code="400">Propiedades inválidas.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.DeleteSensorAsync(System.Int32)">
+            <summary>Elimina un sensor por su ID.</summary>
+            <param name="id">ID del sensor.</param>
+            <response code="200">Eliminado correctamente.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAllReadingsAsync">
+            <summary>Obtiene todas las lecturas de sensores.</summary>
+            <response code="200">Devuelve la lista de lecturas.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetReadingByIdAsync(System.Int32)">
+            <summary>Obtiene una lectura por su ID.</summary>
+            <param name="id">ID de la lectura.</param>
+            <response code="200">Devuelve la lectura.</response>
+            <response code="404">No se encuentra la lectura.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetSensorReadingsBySensorIdAsync(System.Int32)">
+            <summary>Obtiene todas las lecturas de un sensor.</summary>
+            <param name="sensorId">ID del sensor.</param>
+            <response code="200">Devuelve la lista de lecturas.</response>
+            <response code="404">No se encuentran lecturas.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.CreateReadingAsync(Presentation.Request.CreateSensorReadingCommand)">
+             <summary>Crea una nueva lectura de sensor.</summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 POST /api/Device/readings
+                 {
+                    "sensorId": 10,
+                    "value": 23.5,
+                    "timestamp": "2024-06-10T14:30:00"
+                 }
+            
+             - sensorId: ID del sensor al que pertenece la lectura.
+             - value: Valor numérico registrado por el sensor.
+             - timestamp: Fecha y hora de la lectura (en formato ISO 8601).
+             </remarks>
+             <param name="command">Datos de la lectura a crear.</param>
+             <response code="201">Devuelve el ID de la lectura creada.</response>
+             <response code="400">Propiedades inválidas.</response>
+             <response code="409">Lectura duplicada.</response>
+             <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.UpdateReadingAsync(System.Int32,Presentation.Request.UpdateSensorReadingCommand)">
+            <summary>Actualiza una lectura existente.</summary>
+            <param name="id">ID de la lectura.</param>
+            <param name="command">Datos actualizados.</param>
+            <response code="200">Actualizado correctamente.</response>
+            <response code="400">Propiedades inválidas.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.DeleteReadingAsync(System.Int32)">
+            <summary>Elimina una lectura por su ID.</summary>
+            <param name="id">ID de la lectura.</param>
+            <response code="200">Eliminado correctamente.</response>
+            <response code="404">No encontrado.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAllAlertsAsync">
+            <summary>Obtiene todas las alertas.</summary>
+            <response code="200">Devuelve la lista de alertas.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAlertByIdAsync(System.Int32)">
+            <summary>Obtiene una alerta por su ID.</summary>
+            <param name="id">ID de la alerta.</param>
+            <response code="200">Devuelve la alerta.</response>
+            <response code="404">No se encuentra la alerta.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetAlertsByDeviceIdAsync(System.Int32)">
+            <summary>Obtiene todas las alertas de un dispositivo.</summary>
+            <param name="deviceId">ID del dispositivo.</param>
+            <response code="200">Devuelve la lista de alertas.</response>
+            <response code="404">No se encuentran alertas.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.CreateAlertAsync(Presentation.Request.CreateAlertCommand)">
+             <summary>Crea una nueva alerta.</summary>
+             <remarks>
+             Ejemplo de solicitud:
+            
+                 POST /api/Device/alerts
+                 {
+                    "deviceId": 1,
+                    "message": "Temperatura alta",
+                    "level": 2,
+                    "timestamp": "2024-06-10T14:30:00"
+                 }
+            
+             - deviceId: ID del dispositivo.
+             - message: Mensaje de la alerta.
+             - level: Nivel de la alerta (0 = Info, 1 = Warning, 2 = Critical).
+             - timestamp: Fecha y hora de la alerta (ISO 8601).
+             </remarks>
+             <param name="command">Datos de la alerta a crear.</param>
+             <response code="201">Devuelve el ID de la alerta creada.</response>
+             <response code="400">Propiedades inválidas.</response>
+             <response code="409">Alerta duplicada.</response>
+             <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.UpdateAlertAsync(System.Int32,Presentation.Request.UpdateAlertCommand)">
+            <summary>Actualiza una alerta existente.</summary>
+            <param name="id">ID de la alerta.</param>
+            <param name="command">Datos actualizados.</param>
+            <response code="200">Actualizado correctamente.</response>
+            <response code="400">Propiedades inválidas.</response>
+            <response code="404">No encontrada.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
+        <member name="M:Presentation.Controllers.DeviceController.DeleteAlertAsync(System.Int32)">
+            <summary>Elimina una alerta por su ID.</summary>
+            <param name="id">ID de la alerta.</param>
+            <response code="200">Eliminada correctamente.</response>
+            <response code="404">No encontrada.</response>
+            <response code="500">Error inesperado.</response>
+        </member>
         <member name="M:Presentation.Controllers.FieldController.GetAsync">
             <summary>Obtiene todos los campos activos.</summary>
             <remarks>

@@ -31,6 +31,13 @@ public class NutriControlContext : DbContext
     public DbSet<Recommendation> Recommendations { get; set; }
     
     public DbSet<History> Histories { get; set; }
+    
+    public DbSet<Device> Devices { get; set; }
+    
+    public DbSet<Sensor> Sensors { get; set; }
+    public DbSet<SensorReading> SensorReadings { get; set; }
+    
+    public DbSet<Alert> Alerts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -103,6 +110,36 @@ public class NutriControlContext : DbContext
         builder.Entity<History>().Property(h => h.UnitOfMeasurement).IsRequired().HasMaxLength(20);
         builder.Entity<History>().Property(h => h.PercentageSaved).IsRequired().HasDefaultValue(0.0);
         builder.Entity<History>().Property(h => h.IsActive).IsRequired().HasDefaultValue(true);
+        
+        
+        builder.Entity<Device>().ToTable("Device");
+        builder.Entity<Device>().HasKey(d => d.Id);
+        builder.Entity<Device>().Property(d => d.CropId).IsRequired();
+        builder.Entity<Device>().Property(d => d.Name).IsRequired().HasMaxLength(100);
+        builder.Entity<Device>().Property(d => d.IsActive).IsRequired().HasDefaultValue(true);
+        
+        builder.Entity<Sensor>().ToTable("Sensor");
+        builder.Entity<Sensor>().HasKey(s => s.Id);
+        builder.Entity<Sensor>().Property(s => s.DeviceId).IsRequired();
+        builder.Entity<Sensor>().Property(s => s.Type).IsRequired().HasMaxLength(50);
+        builder.Entity<Sensor>().Property(s => s.UnitOfMeasurement).IsRequired().HasMaxLength(20);
+        builder.Entity<Sensor>().Property(s => s.Status).IsRequired().HasMaxLength(20);
+        builder.Entity<Sensor>().Property(s => s.IsActive).IsRequired().HasDefaultValue(true);
+        
+        builder.Entity<SensorReading>().ToTable("SensorReading");
+        builder.Entity<SensorReading>().HasKey(sr => sr.Id);
+        builder.Entity<SensorReading>().Property(sr => sr.SensorId).IsRequired();
+        builder.Entity<SensorReading>().Property(sr => sr.Timestamp).IsRequired();
+        builder.Entity<SensorReading>().Property(sr => sr.Value).IsRequired();
+        builder.Entity<SensorReading>().Property(sr => sr.IsActive).IsRequired().HasDefaultValue(true);
+        
+        builder.Entity<Alert>().ToTable("Alert");
+        builder.Entity<Alert>().HasKey(a => a.Id);
+        builder.Entity<Alert>().Property(a => a.DeviceId).IsRequired();
+        builder.Entity<Alert>().Property(a => a.Timestamp).IsRequired();
+        builder.Entity<Alert>().Property(a => a.Message).IsRequired().HasMaxLength(500);
+        builder.Entity<Alert>().Property(a => a.Level).IsRequired().HasConversion<string>();
+        builder.Entity<Alert>().Property(a => a.IsActive).IsRequired().HasDefaultValue(true);
         
     }
 }

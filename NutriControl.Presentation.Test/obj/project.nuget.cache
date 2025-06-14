@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zPUCkH5lhcE=",
+  "dgSpecHash": "cMpDIs2jzgw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Presentation.Test\\NutriControl.Presentation.Test.csproj",
+  "projectFilePath": "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Presentation.Test\\NutriControl.Presentation.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chris\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

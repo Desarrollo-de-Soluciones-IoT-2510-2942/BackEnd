@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NutriControl.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ac653500d6baa402216f1161b436d0ffb0ad3b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("NutriControl.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NutriControl.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

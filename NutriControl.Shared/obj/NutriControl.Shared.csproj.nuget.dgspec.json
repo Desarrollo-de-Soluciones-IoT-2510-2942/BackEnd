@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Shared\\NutriControl.Shared.csproj": {}
+    "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Shared\\NutriControl.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Shared\\NutriControl.Shared.csproj": {
+    "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Shared\\NutriControl.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Shared\\NutriControl.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Shared\\NutriControl.Shared.csproj",
         "projectName": "NutriControl.Shared",
-        "projectPath": "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Shared\\NutriControl.Shared.csproj",
+        "projectPath": "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Shared\\NutriControl.Shared.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\RiderProjects\\NutriControl\\NutriControl.Shared\\obj\\",
+        "outputPath": "C:\\Users\\chris\\Documents\\GitHub\\BackEnd\\NutriControl.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

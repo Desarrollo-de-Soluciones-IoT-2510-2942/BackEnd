@@ -102,7 +102,7 @@ public class NutriControlContext : DbContext
         
         builder.Entity<History>().ToTable("History");
         builder.Entity<History>().HasKey(h => h.Id);
-        builder.Entity<Recommendation>().Property(r => r.CropId).IsRequired();
+        builder.Entity<History>().Property(r => r.CropId).IsRequired();
         builder.Entity<History>().Property(h => h.StartDate).IsRequired();
         builder.Entity<History>().Property(h => h.EndDate).IsRequired();
         builder.Entity<History>().Property(h => h.SavingsType).IsRequired().HasMaxLength(50);

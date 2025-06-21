@@ -137,13 +137,9 @@ using (var context = scope.ServiceProvider.GetService<NutriControlContext>())
     context.Database.EnsureCreated();
 }
 
-// Configure HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger(); 
+app.UseSwaggerUI();
+    
 app.UseHttpsRedirection();
 
 

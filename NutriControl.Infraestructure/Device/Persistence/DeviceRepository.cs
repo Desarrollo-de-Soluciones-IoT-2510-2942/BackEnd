@@ -252,4 +252,43 @@ public class DeviceRepository: IDeviceRepository
         return await _context.Alerts.Where(a => a.DeviceId == deviceId).ToListAsync();
     }
     
+    public async Task<List<Sensor>> GetSensorsByUsernameAsync(string username)
+    {
+        // 1. Obtener el usuario
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.IsActive);
+        if (user == null) return new List<Sensor>();
+
+        // 2. Obtener los fields del usuario
+        var fields = await _context.Fields
+            .Where(f => f.UserId == user.Id && f.IsActive)
+            .Select(f => f.Id)
+            .ToListAsync();
+
+        if (!fields.Any()) return new List<Sensor>();
+
+        // 3. Obtener los crops de esos fields
+        var crops = await _context.Crops
+            .Where(c => fields.Contains(c.FieldId) && c.IsActive)
+            .Select(c => c.Id)
+            .ToListAsync();
+
+        if (!crops.Any()) return new List<Sensor>();
+
+        // 4. Obtener los dispositivos de esos crops
+        var devices = await _context.Devices
+            .Where(d => crops.Contains(d.CropId) && d.IsActive)
+            .Select(d => d.Id)
+            .ToListAsync();
+
+        if (!devices.Any()) return new List<Sensor>();
+
+        // 5. Obtener los sensores de esos dispositivos
+        var sensors = await _context.Sensors
+            .Where(s => devices.Contains(s.DeviceId) && s.IsActive)
+            .ToListAsync();
+
+        return sensors;
+    }
+    
+    
 }

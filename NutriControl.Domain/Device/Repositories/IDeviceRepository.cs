@@ -33,4 +33,6 @@ public interface IDeviceRepository
     
     Task<List<Alert>> GetAlertsByDeviceIdAsync(int deviceId);
     
+    Task<List<Sensor>> GetSensorsByUsernameAsync(string username);
+    
 }

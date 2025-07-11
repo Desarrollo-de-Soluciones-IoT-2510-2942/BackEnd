@@ -23,6 +23,8 @@ public interface IDeviceQueryService
     
     Task<List<AlertResponse>?> Handle(GetAlertsByDeviceIdQuery query);
     
+    Task<List<SensorResponse>?> Handle(GetSensorsByUserNameQuery query);
+    
     
     
 }

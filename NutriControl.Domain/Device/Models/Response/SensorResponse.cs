@@ -5,6 +5,8 @@ namespace _1_API.Response;
 
 public class SensorResponse
 {
+    public int Id { get; set; } 
+    
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public SensorType Type { get; set; }
     

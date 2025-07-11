@@ -87,4 +87,11 @@ public class DeviceQueryService: IDeviceQueryService
         var data = await _deviceRepository.GetAlertsByDeviceIdAsync(query.DeviceId);
         return _mapper.Map<List<Alert>, List<AlertResponse>>(data);
     }
+    
+    public async Task<List<SensorResponse>?> Handle(GetSensorsByUserNameQuery query)
+    {
+        var data = await _deviceRepository.GetSensorsByUsernameAsync(query.Username);
+        return _mapper.Map<List<Sensor>, List<SensorResponse>>(data);
+    }
+    
 }

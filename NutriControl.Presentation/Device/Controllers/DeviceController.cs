@@ -609,4 +609,24 @@ public async Task<IActionResult> DeleteAlertAsync(int id)
     }
 }
     
+
+// GET: api/Device/sensors/by-user/{username}
+/// <summary>Obtiene todos los sensores asociados a un usuario.</summary>
+/// <param name="username">Nombre de usuario.</param>
+/// <response code="200">Devuelve la lista de sensores.</response>
+/// <response code="404">No se encuentran sensores.</response>
+/// <response code="500">Error interno del servidor.</response>
+[HttpGet("sensors/by-user/{username}")]
+[ProducesResponseType(typeof(List<SensorResponse>), StatusCodes.Status200OK)]
+[ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+[ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+[Produces(MediaTypeNames.Application.Json)]
+[CustomAuthorize("Farmer")]
+public async Task<IActionResult> GetSensorsByUserNameAsync(string username)
+{
+    var result = await _deviceQueryService.Handle(new GetSensorsByUserNameQuery(username));
+    if (result == null || result.Count == 0) return NotFound();
+    return Ok(result);
+}
+
 }

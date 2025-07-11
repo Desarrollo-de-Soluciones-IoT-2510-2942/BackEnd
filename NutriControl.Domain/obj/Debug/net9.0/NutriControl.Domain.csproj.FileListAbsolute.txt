@@ -10,3 +10,16 @@ C:\Users\chris\RiderProjects\NutriControl\NutriControl.Domain\obj\Debug\net9.0\N
 C:\Users\chris\RiderProjects\NutriControl\NutriControl.Domain\obj\Debug\net9.0\refint\NutriControl.Domain.dll
 C:\Users\chris\RiderProjects\NutriControl\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.pdb
 C:\Users\chris\RiderProjects\NutriControl\NutriControl.Domain\obj\Debug\net9.0\ref\NutriControl.Domain.dll
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\bin\Debug\net9.0\NutriControl.Domain.deps.json
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\bin\Debug\net9.0\NutriControl.Domain.dll
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\bin\Debug\net9.0\NutriControl.Domain.pdb
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.csproj.AssemblyReference.cache
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.AssemblyInfoInputs.cache
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.AssemblyInfo.cs
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.csproj.CoreCompileInputs.cache
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.sourcelink.json
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.dll
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\refint\NutriControl.Domain.dll
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\NutriControl.Domain.pdb
+C:\Users\chris\Documents\GitHub\BackEnd\NutriControl.Domain\obj\Debug\net9.0\ref\NutriControl.Domain.dll

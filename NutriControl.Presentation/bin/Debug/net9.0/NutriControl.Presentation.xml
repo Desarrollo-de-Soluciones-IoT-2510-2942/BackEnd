@@ -441,6 +441,13 @@
             <response code="404">No encontrada.</response>
             <response code="500">Error inesperado.</response>
         </member>
+        <member name="M:Presentation.Controllers.DeviceController.GetSensorsByUserNameAsync(System.String)">
+            <summary>Obtiene todos los sensores asociados a un usuario.</summary>
+            <param name="username">Nombre de usuario.</param>
+            <response code="200">Devuelve la lista de sensores.</response>
+            <response code="404">No se encuentran sensores.</response>
+            <response code="500">Error interno del servidor.</response>
+        </member>
         <member name="M:Presentation.Controllers.FieldController.GetAsync">
             <summary>Obtiene todos los campos activos.</summary>
             <remarks>

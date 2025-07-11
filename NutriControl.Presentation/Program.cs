@@ -17,45 +17,46 @@ using NutriControl.Presentation.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ad CORS
+// 🔐 Configurar CORS para permitir acceso desde cualquier origen (para desarrollo)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllPolicy",
-        policy => policy.AllowAnyOrigin()
+        policy => policy
+            .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
 
-// Add services to the container.
+// Servicios base
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+// 🔧 Swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "APis form mange NutriControl",
-        Description = "An ASP.NET Core Web API for managing ToDo finance",
+        Title = "APIs for NutriControl",
+        Description = "ASP.NET Core Web API for NutriControl Platform",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {
-            Name = "Example Contact",
+            Name = "Support",
             Url = new Uri("https://example.com/contact")
         },
         License = new OpenApiLicense
         {
-            Name = "Example License",
+            Name = "License",
             Url = new Uri("https://example.com/license")
         }
     });
 
-
-    
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Please enter token",
+        Description = "Ingrese el token JWT",
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
         BearerFormat = "JWT",
@@ -81,8 +82,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-
-// Dependency injection
+// Inyección de dependencias
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 builder.Services.AddScoped<IEncryptService, EncryptService>();
@@ -105,52 +105,54 @@ builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 builder.Services.AddScoped<IDeviceCommandService, DeviceCommandService>();
 builder.Services.AddScoped<IDeviceQueryService, DeviceQueryService>();
 
-
-
-
 // AutoMapper
 builder.Services.AddAutoMapper(
     typeof(RequestToModels),
     typeof(ModelsToRequest),
     typeof(ModelsToResponse));
 
-// Conexión a MySQL
+// Conexión a base de datos
 var connectionString = builder.Configuration.GetConnectionString("NutriControlDB");
-builder.Services.AddDbContext<NutriControlContext>(
-    dbContextOptions =>
-    {
-        dbContextOptions.UseMySql(connectionString,
-            ServerVersion.AutoDetect(connectionString)
-        );
-    });
+builder.Services.AddDbContext<NutriControlContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
-// Auth
+// 🔐 Autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer();
 
 var app = builder.Build();
 
+// 🧱 Middleware global
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+// Asegurar que la base de datos exista
 using (var scope = app.Services.CreateScope())
 using (var context = scope.ServiceProvider.GetService<NutriControlContext>())
 {
     context.Database.EnsureCreated();
 }
 
-app.UseSwagger(); 
+// 📘 Swagger UI
+app.UseSwagger();
 app.UseSwaggerUI();
-    
-app.UseHttpsRedirection();
 
-
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.UseMiddleware<AuthenticationMiddleware>();
+// ✅ CORS — ⚠️ IMPORTANTE: este debe ir antes de Controllers, Auth, etc.
 app.UseCors("AllowAllPolicy");
 
+// HTTPS Redirection
+app.UseHttpsRedirection();
+
+// 🔐 Auth
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Middleware personalizado (si necesitas validación adicional)
+app.UseMiddleware<AuthenticationMiddleware>();
+
+// Controllers
+app.MapControllers();
+
+// 🚀 Ejecutar app
 app.Run();

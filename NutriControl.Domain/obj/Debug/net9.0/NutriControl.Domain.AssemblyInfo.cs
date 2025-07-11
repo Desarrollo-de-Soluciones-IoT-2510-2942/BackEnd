@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NutriControl.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6947ac65fe9f3a1880ed24e0f7c61c404e7b6ad0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d328452492e91ae4a4b389a3c82c5d3defa679d")]
 [assembly: System.Reflection.AssemblyProductAttribute("NutriControl.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NutriControl.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
